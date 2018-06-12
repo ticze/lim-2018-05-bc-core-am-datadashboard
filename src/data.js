@@ -17,6 +17,8 @@ conexion('/data/cohorts/lim-2018-03-pre-core-pw/users.json');
 conexion('/data/cohorts/lim-2018-03-pre-core-pw/progress.json');
 conexion('/data/cohorts.json');
 
-
-
+//creando funciones 
+//window.computeUserStatus = (users, progress, course) => {
+  //const arregloUser = [];
+//};
 
