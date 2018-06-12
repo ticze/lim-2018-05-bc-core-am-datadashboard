@@ -1,0 +1,10 @@
+section{
+    width: 151px;
+    height: 5%;
+    margin: 3%;
+    float: initial;
+};
+img{
+    height: 180px;
+    display: inline-block;
+};
