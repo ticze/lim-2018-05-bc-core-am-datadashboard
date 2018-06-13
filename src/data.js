@@ -1,3 +1,8 @@
+
+
+
+
+
 //CREAANDO LAS  FUNCIONES
 
 window.computeUsersStats = (users, progress, courses) => {
