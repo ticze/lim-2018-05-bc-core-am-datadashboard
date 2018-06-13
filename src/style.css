@@ -1,10 +1,11 @@
-section{
-    width: 151px;
-    height: 5%;
-    margin: 3%;
+figure{
+    width: auto;
+    margin: 0%;
     float: initial;
+    border: 5px solid;
 };
 img{
-    height: 180px;
     display: inline-block;
+    height: 90px;
+    width: 900px;
 };
