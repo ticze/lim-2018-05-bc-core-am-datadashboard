@@ -1,4 +1,3 @@
-
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json'
 const btnUser = document.getElementById('btnMostrarUser');
 
@@ -6,9 +5,8 @@ const btnUser = document.getElementById('btnMostrarUser');
 btnUser.addEventListener('click', function (e) {
   e.preventDefault();
   getNews();
-  
-
 });
+
 
 function getNews() {
   //Creamos nuestro Objeto
@@ -32,9 +30,7 @@ function addNews() {
     //document.getElementById('response-container').innerHTML=usuario.name;
   });
 
-
-
-    
+   
   //console.log(data);
  }
 
