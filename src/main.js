@@ -1,8 +1,8 @@
 const btnUser = document.getElementById('btnMostrarUser');
-
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json'
+const urlCohorts = '../data/cohorts.json'
 
-const getJSON = (url, callback) =>{
+const getJSON = (url, callback) => {
   //Creamos nuestro Objeto
   const request = new XMLHttpRequest();
   request.open('GET', url);
@@ -13,28 +13,48 @@ const getJSON = (url, callback) =>{
   request.send();
 }
 
-const handleError = () =>{
+const handleError = () => {
   console.log('Se ha prespepitoentado un error');
 }
 
 const addUsers = () => {
   //debugger
   const data = JSON.parse(event.currentTarget.responseText);
-  
-  data.map((usuario)=>{
-   // console.log(usuario.name + '//' + usuario.signupCohort );
-    document.getElementById('response-container').innerHTML += '<li>' + usuario.name + '</li>';
-  });  
- //console.log(data);
- }
 
- 
+  data.map((usuario) => {
+    // console.log(usuario.name + '//' + usuario.signupCohort );
+    document.getElementById('container-user').innerHTML += '<li>' + usuario.name + '</li>';
+  });
 
-  // Agregamos un evento submit y las instrucciones a ejecutar
+}
+
+
+const addCohorts = () => {
+  //debugger
+  const data = JSON.parse(event.currentTarget.responseText);
+
+  data.map((curso) => {
+    //console.log(curso );
+    document.getElementById('contaniner-cohorts').innerHTML += '<option>' + curso.id + '</option>'
+  });
+
+}
+
+
+
+
+// Agregamos un evento submit y las instrucciones a ejecutar
 btnUser.addEventListener('click', e => {
   e.preventDefault();
-  getJSON(urlUser, addUser);
-  
+  getJSON(urlUser, addUsers);
+ 
+  //getJSON(urlCohorts,addCohorts);
+
 });
+
+getJSON(urlCohorts, addCohorts);
+
+
+
 
 
