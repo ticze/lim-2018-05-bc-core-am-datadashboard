@@ -1,6 +1,9 @@
 const btnUser = document.getElementById('btnMostrarUser');
-const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json'
-const urlCohorts = '../data/cohorts.json'
+const selectbtn = document.getElementById('select-cohorts');
+const listUsers = document.getElementById('container-user');
+const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
+const urlCohorts = '../data/cohorts.json';
+const urlProgress = '';
 
 const getJSON = (url, callback) => {
   //Creamos nuestro Objeto
@@ -16,43 +19,50 @@ const getJSON = (url, callback) => {
 const handleError = () => {
   console.log('Se ha prespepitoentado un error');
 }
-
-const addUsers = () => {
+//FUNCION DE LISTA DE USUARIO
+ const addUsers = () => { 
   //debugger
   const data = JSON.parse(event.currentTarget.responseText);
+    data.map((usuario) => {
+      let listUser = document.createElement('li');
+      listUser.innerHTML = usuario.name;
+      listUsers.appendChild(listUser);
+    });
 
-  data.map((usuario) => {
-    // console.log(usuario.name + '//' + usuario.signupCohort );
-    document.getElementById('container-user').innerHTML += '<li>' + usuario.name + '</li>';
+}
+
+//FUNCION LISTA DE COHORTS
+const addCohorts = (event) => {
+  //debugger
+  const data = JSON.parse(event.target.responseText);
+
+  data.map((cohorts) => {
+
+    let listCor = document.createElement('option');
+    listCor.value = cohorts.id;
+    listCor.innerHTML = cohorts.id;
+    selectbtn.appendChild(listCor);
   });
 
 }
 
 
-const addCohorts = () => {
-  //debugger
-  const data = JSON.parse(event.currentTarget.responseText);
-
-  data.map((curso) => {
-    //console.log(curso );
-    document.getElementById('contaniner-cohorts').innerHTML += '<option>' + curso.id + '</option>'
-  });
-
-}
-
-
-
-
-// Agregamos un evento submit y las instrucciones a ejecutar
-btnUser.addEventListener('click', e => {
+selectbtn.addEventListener('change', e => {
   e.preventDefault();
-  getJSON(urlUser, addUsers);
- 
-  //getJSON(urlCohorts,addCohorts);
+  if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
+    getJSON(urlUser,addUsers);
+  }
+ // console.log(e.target)
 
+  /* const url3 = '../data/cohorts/'+ e.target.value + '/users.json'
+  getJSON(url3, addUsers);  */   
 });
 
 getJSON(urlCohorts, addCohorts);
+
+
+
+
 
 
 
