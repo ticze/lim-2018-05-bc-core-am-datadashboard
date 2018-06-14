@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Data Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <figure>
-      <img src="../img/Laboratoria_CMYK_logo-03.png">
-    </figure>
 
-    <div>
-      <h2>Lista de Estudiantes y los cursos</h2>
-    </div>
-    <button type="button" id="btnMostrarUser">Mostrar</button>
-    <div >
-      <ul id="response-container"></ul>
+<head>
+  <meta charset="utf-8">
+  <title>Data Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <figure>
+    <img src="../img/Laboratoria_CMYK_logo-03.png">
+  </figure>
+
+  <div>
+    <h2>Lista de Estudiantes y los cursos</h2>
+    <select id="select-cohorts"></select>
+  </div>
+
+  <div>
+    <ul id="container-user"></ul>
 
   </div>
-    <script src="main.js"></script>
-    <script src="data.js"></script>
-  </body>
+
+  <script src="main.js"></script>
+  <script src="data.js"></script>
+</body>
+
 </html>

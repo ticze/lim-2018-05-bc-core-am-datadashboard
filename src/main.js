@@ -1,41 +1,70 @@
-
-const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json'
 const btnUser = document.getElementById('btnMostrarUser');
+const selectbtn = document.getElementById('select-cohorts');
+const listUsers = document.getElementById('container-user');
+const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
+const urlCohorts = '../data/cohorts.json';
+const urlProgress = '';
 
-// Agregamos un evento submit y las instrucciones a ejecutar
-btnUser.addEventListener('click', function (e) {
-  e.preventDefault();
-  getNews();
-  
-
-});
-
-function getNews() {
+const getJSON = (url, callback) => {
   //Creamos nuestro Objeto
-  const articleRequest = new XMLHttpRequest();
-  articleRequest.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json');
+  const request = new XMLHttpRequest();
+  request.open('GET', url);
   //La funcion onload se le asigna la funcion addNEws
-  articleRequest.onload = addNews;
+  request.onload = callback;
   //La funcion onerror tiene asignado la funcion handleError 
-  articleRequest.onerror = handleError;
-  articleRequest.send();
+  request.onerror = handleError;
+  request.send();
 }
 
-function handleError() {
-  console.log('Se ha presentado un error');
+const handleError = () => {
+  console.log('Se ha prespepitoentado un error');
+}
+//FUNCION DE LISTA DE USUARIO
+ const addUsers = () => { 
+  //debugger
+  const data = JSON.parse(event.currentTarget.responseText);
+    data.map((usuario) => {
+      let listUser = document.createElement('li');
+      listUser.innerHTML = usuario.name;
+      listUsers.appendChild(listUser);
+    });
+
 }
 
-function addNews() {
-  const data = JSON.parse(this.responseText);
-  data.map((usuario)=>{
-    console.log(usuario.name );
-    //document.getElementById('response-container').innerHTML=usuario.name;
+//FUNCION LISTA DE COHORTS
+const addCohorts = (event) => {
+  //debugger
+  const data = JSON.parse(event.target.responseText);
+
+  data.map((cohorts) => {
+
+    let listCor = document.createElement('option');
+    listCor.value = cohorts.id;
+    listCor.innerHTML = cohorts.id;
+    selectbtn.appendChild(listCor);
   });
 
+}
 
 
-    
-  //console.log(data);
- }
+selectbtn.addEventListener('change', e => {
+  e.preventDefault();
+  if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
+    getJSON(urlUser,addUsers);
+  }
+ // console.log(e.target)
 
-  
+  /* const url3 = '../data/cohorts/'+ e.target.value + '/users.json'
+  getJSON(url3, addUsers);  */   
+});
+
+getJSON(urlCohorts, addCohorts);
+
+
+
+
+
+
+
+
+
