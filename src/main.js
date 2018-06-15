@@ -23,11 +23,12 @@ const handleError = () => {
  const addUsers = () => { 
   //debugger
   const data = JSON.parse(event.currentTarget.responseText);
-    data.map((usuario) => {
+
+   data.map((usuario) => {
       let listUser = document.createElement('li');
       listUser.innerHTML = usuario.name;
       listUsers.appendChild(listUser);
-    });
+    }); 
 
 }
 
@@ -51,9 +52,12 @@ selectbtn.addEventListener('change', e => {
   e.preventDefault();
   if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
     getJSON(urlUser,addUsers);
-  }
- // console.log(e.target)
+  } 
 
+  
+  
+  
+ 
   /* const url3 = '../data/cohorts/'+ e.target.value + '/users.json'
   getJSON(url3, addUsers);  */   
 });

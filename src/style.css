@@ -1,11 +1,19 @@
+body{
+  background-color: #FFE521;
+}
+header{
+  background-color: white;
+  display: inline-block;
+  height: 100px;
+  width: 100%;
+  margin: 0%;
+}
+
 figure{
-    width: auto;
-    margin: 0%;
-    float: initial;
-    border: 5px solid;
-};
+  margin: 0;
+  height: 100px;
+}
 img{
-    display: inline-block;
-    height: 90px;
-    width: 900px;
-};
+  margin: 0;
+  height: 100px;
+}

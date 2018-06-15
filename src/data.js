@@ -1,6 +1,7 @@
 //CREAANDO LAS  FUNCIONES
 
 window.computeUsersStats = (users, progress, courses) => {
+  
   //Creamos un Objeto con la proipiedad stats
   
   let usersWithStats = {
