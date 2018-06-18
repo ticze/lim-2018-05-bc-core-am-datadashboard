@@ -40,6 +40,8 @@ window.filterUsers = (users, search)=>{
 }
 
 
-
-
+//creando funciones 
+//window.computeUserStatus = (users, progress, course) => {
+  //const arregloUser = [];
+//};
 
