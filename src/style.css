@@ -21,7 +21,15 @@ img{
   width: 25%;
   height: -webkit-fill-available;
 }
-
+#sedes{
+  padding: 9px;
+}
+#select-cohorts{
+  width: 100%;
+}
+#btnAlumnas{
+  padding: 9px;
+}
 #btnMostrarUser{
   text-align: center;
   text-decoration-color: #333333;
