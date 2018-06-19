@@ -1,32 +1,34 @@
 //CREAANDO LAS  FUNCIONES
 
-window.computeUsersStats = (users, progress, courses) => {
-  
-  //Creamos un Objeto con la proipiedad stats
-  
-  let usersWithStats = {
-    //Objeto stats
-    stats: {
-      percent: 23,
-      exercises: {
-        total: 23,
-        completed: 23,
-        percent : 23
-      },
-      reads: {
-        total:23,
-        completed:23,
-        percent:23
-      },
-      quizzes: {
-        total : 23,
-        completed:23,
-        scoreSum: 23,
-        scoreAvg: 23
-      },
-    }
+window.computeUsersStats = (users, progress, courses) => { 
 
-  };
+  const keyAddProgress = Object.keys(progress);
+  
+  for (const usuario of users) {
+    keyAddProgress.map((codigoUser) =>{
+      if (usuario.id === codigoUser) {       
+        if (progress[codigoUser].intro !== undefined ){
+          
+          let usersWithStats = {            
+            //Objeto stats
+            stats: {
+              percent: progress[codigoUser].intro.percent,
+            }
+               
+          };
+
+          console.log(usersWithStats);
+          
+            
+              
+        }
+      } 
+    });
+  
+
+
+  }
+  
 };
 
 //Funcion para Ordenar
