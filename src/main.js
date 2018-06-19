@@ -20,9 +20,10 @@ const handleError = () => {
   console.log('Se ha presentado un error');
 }
 //FUNCION DE LISTA DE USUARIO
-const addUsers = (event) => { 
+const addUser = (event) => { 
   //debugger
   const data = JSON.parse(event.target.responseText);
+  console.log (data);
   data.map((usuario) => {
     let listUser = document.createElement('li');
     listUser.innerHTML = usuario.name;
@@ -62,7 +63,7 @@ const addCohorts = (event) => {
 selectbtn.addEventListener('change', e => {
   e.preventDefault();
   if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
-    getJSON(urlUser,addUsers);
+    getJSON(urlUser,addUser);
   } 
   /* const url3 = '../data/cohorts/'+ e.target.value + '/users.json'
   getJSON(url3, addUsers);  */   
@@ -70,7 +71,7 @@ selectbtn.addEventListener('change', e => {
 
 btnUser.addEventListener('click',(e) => {
   e.preventDefault();
-  getJSON(urlUser,addUsers);
+  getJSON(urlUser,addUser);
 });
 
 getJSON(urlCohorts, addCohorts);
