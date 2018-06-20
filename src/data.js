@@ -1,5 +1,3 @@
-//CREAANDO LAS  FUNCIONES
-
 window.computeUsersStats = (users, progress, courses) => { 
 
   const keyAddProgress = Object.keys(progress);
@@ -14,36 +12,20 @@ window.computeUsersStats = (users, progress, courses) => {
             stats: {
               percent: progress[codigoUser].intro.percent,
             }
-               
           };
-
-          console.log(usersWithStats);
-          
-            
-              
+          console.log(usersWithStats);    
         }
       } 
     });
-  
-
-
   }
-  
 };
 
 //Funcion para Ordenar
-window.sortUsers = (users, orderBy, orderDirection)=>{
-
+window.sortUsers = (users, orderBy, orderDirection) => {
 };
 
+window.filterUsers = (users, search) => {
+};
 
-window.filterUsers = (users, search)=>{
-
-}
-
-
-//creando funciones 
-//window.computeUserStatus = (users, progress, course) => {
-  //const arregloUser = [];
-//};
-
+window.processCohortData = (options) => {
+};

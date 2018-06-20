@@ -1,3 +1,5 @@
+const selectbtn = document.getElementById('select-cohorts');
+const listUsers = document.getElementById('container-user');
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 const urlCohorts = '../data/cohorts.json';
 const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
@@ -13,7 +15,6 @@ const getJSON = (url, callback) => {
 const handleError = () => {
   console.log('Se ha presentado un error');
 }
-
 
 const addUserProgress = () => {
   const courses = JSON.parse(event.target.responseText);
@@ -32,5 +33,21 @@ const addUserProgress = () => {
 }
 getJSON(urlUser, addUserProgress);
 
+//FUNCION LISTA DE COHORTS
+const addCohorts = (event) => {
+  const data = JSON.parse(event.target.responseText);
+  data.map((cohorts) => {
+    let listCor = document.createElement('option');
+    listCor.value = cohorts.id;
+    listCor.innerHTML = cohorts.id;
+    selectbtn.appendChild(listCor);
+  });
+}
 
-
+selectbtn.addEventListener('change', e => {
+  e.preventDefault();
+  if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
+    getJSON(urlUser,addUsers);
+  }   
+});
+getJSON(urlCohorts, addCohorts) 

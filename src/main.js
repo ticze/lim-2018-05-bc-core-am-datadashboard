@@ -1,4 +1,4 @@
-/* const btnUser = document.getElementById('btnMostrarUser');
+const btnUser = document.getElementById('btnMostrarUser');
 const selectbtn = document.getElementById('select-cohorts');
 const listUsers = document.getElementById('container-user');
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
@@ -28,23 +28,7 @@ const addUsers = (event) => {
     listUsers.appendChild(listUser);
   }); 
 }
-//FUNCION DE ID DE USUARIO
-const addId = (event) => { 
-  //debugger
-  const data = JSON.parse(event.target.responseText);
-  data.map((usuario) => {
-    let listUser = document.createElement('li');
-    listUser.innerHTML = usuario.id;
-    listUsers.appendChild(listUser);
-  }); 
-}
-//FUNCION DEL PROGRESO
-const addProgress = (event) => {
-  const data = JSON.parse(event.target.responseText); 
-  const keyAddProgress = Object.keys(data);
-  console.log(keyAddProgress);
-}
-getJSON(urlProgress,addProgress)
+
 
 //FUNCION LISTA DE COHORTS
 const addCohorts = (event) => {
@@ -69,5 +53,5 @@ btnUser.addEventListener('click',(e) => {
   getJSON(urlUser, addUsers);
 });
 
-getJSON(urlCohorts, addCohorts) */
+getJSON(urlCohorts, addCohorts) 
  
