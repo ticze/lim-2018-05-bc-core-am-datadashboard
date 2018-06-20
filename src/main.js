@@ -1,4 +1,4 @@
-const btnUser = document.getElementById('btnMostrarUser');
+/* const btnUser = document.getElementById('btnMostrarUser');
 const selectbtn = document.getElementById('select-cohorts');
 const listUsers = document.getElementById('container-user');
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
@@ -20,8 +20,7 @@ const handleError = () => {
   console.log('Se ha presentado un error');
 }
 //FUNCION DE LISTA DE USUARIO
-const addUser = (event) => { 
-  //debugger
+const addUsers = (event) => { 
   const data = JSON.parse(event.target.responseText);
   console.log (data);
   data.map((usuario) => {
@@ -31,56 +30,45 @@ const addUser = (event) => {
   }); 
 }
 //FUNCION DE ID DE USUARIO
-const idUser = (event) => {
+const addId = (event) => { 
+  //debugger
   const data = JSON.parse(event.target.responseText);
-  data.map((usuario)=>{
-    let listId = document.createElement('li');
-    listId.innerHTML = usuario.id;
-    listId.appendChild(listId);
-  });
+  data.map((usuario) => {
+    let listUser = document.createElement('li');
+    listUser.innerHTML = usuario.id;
+    listUsers.appendChild(listUser);
+  }); 
 }
 //FUNCION DEL PROGRESO
 const addProgress = (event) => {
-  const data = JSON.parse(event.target.responseText);
-  data.map((progress)=>{
-    let listProgress = document.createElement('li');
-    listProgress.innerHTML = progress.intro;
-    listProgress.appendChild(listProgress);
-  }); 
+  const data = JSON.parse(event.target.responseText); 
+  const keyAddProgress = Object.keys(data);
+  console.log(keyAddProgress);
 }
+getJSON(urlProgress,addProgress)
+
 //FUNCION LISTA DE COHORTS
 const addCohorts = (event) => {
   const data = JSON.parse(event.target.responseText);
   data.map((cohorts) => {
-    let listCor = document.createElement('option');
+    const listCor = document.createElement('option');
     listCor.value = cohorts.id;
     listCor.innerHTML = cohorts.id;
     selectbtn.appendChild(listCor);
   });
-
 }
-//
+
 selectbtn.addEventListener('change', e => {
   e.preventDefault();
   if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
-    getJSON(urlUser,addUser);
-  } 
-  /* const url3 = '../data/cohorts/'+ e.target.value + '/users.json'
-  getJSON(url3, addUsers);  */   
-});
+    getJSON(urlUser,addUsers);
+  }   
+ });
 
 btnUser.addEventListener('click',(e) => {
   e.preventDefault();
-  getJSON(urlUser,addUser);
+  getJSON(urlUser, addUsers);
 });
 
-getJSON(urlCohorts, addCohorts);
-
-
-
-
-
-
-
-
-
+getJSON(urlCohorts, addCohorts) */
+ 

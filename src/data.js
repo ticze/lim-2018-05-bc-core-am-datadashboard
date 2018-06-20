@@ -1,41 +1,70 @@
 //CREAANDO LAS  FUNCIONES
 
 window.computeUsersStats = (users, progress, courses) => {
-    
-  //Creamos un Objeto con la proipiedad stats
-  
-  let usersWithStats = {
-    //Objeto stats
-    stats: {
-      percent: 23,
-      exercises: {
-        total: 23,
-        completed: 23,
-        percent : 23
-      },
-      reads: {
-        total:23,
-        completed:23,
-        percent:23
-      },
-      quizzes: {
-        total : 23,
-        completed:23,
-        scoreSum: 23,
-        scoreAvg: 23
-      },
-    }
 
-  };
+  const keyAddProgress = Object.keys(progress);
+
+  for (const usuario of users) {
+    //Vamos a Mapear el AR
+    for (const progreso of keyAddProgress) {
+      if (usuario.id === progreso) {
+        let lista = users.map(usersWithSatas => {
+          try {
+            usersWithSatas.stats = {
+              percent: progress[progreso].intro.percent,
+              excercises: {
+                
+                total:23,
+                completed: 34,
+                percent: 23,
+              }
+            }
+            return usersWithSatas
+
+          } catch (error) {
+            return {}
+          }
+        });
+        console.log(lista);
+        return lista
+
+
+      }
+    }
+  }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Funcion para Ordenar
-window.sortUsers = (users, orderBy, orderDirection)=>{
+window.sortUsers = (users, orderBy, orderDirection) => {
 
 };
 
 
-window.filterUsers = (users, search)=>{
+window.filterUsers = (users, search) => {
 
 }
 
