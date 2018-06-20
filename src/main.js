@@ -1,4 +1,4 @@
-const btnUser = document.getElementById('btnMostrarUser');
+/* const btnUser = document.getElementById('btnMostrarUser');
 const selectbtn = document.getElementById('select-cohorts');
 const listUsers = document.getElementById('container-user');
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
@@ -40,18 +40,18 @@ const addCohorts = (event) => {
     selectbtn.appendChild(listCor);
   });
 }
-
+/* 
 selectbtn.addEventListener('change', e => {
   e.preventDefault();
   if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
     getJSON(urlUser,addUsers);
   }   
- });
-
+ }); */
+/* 
 btnUser.addEventListener('click',(e) => {
   e.preventDefault();
   getJSON(urlUser, addUsers);
 });
 
 getJSON(urlCohorts, addCohorts) 
- 
+  */ 

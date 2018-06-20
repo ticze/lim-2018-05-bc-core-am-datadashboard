@@ -11,8 +11,10 @@ window.computeUsersStats = (users, progress, courses) => {
             //Objeto stats
             stats: {
               percent: progress[codigoUser].intro.percent,
+
             }
           };
+          //return(keyAddProgress)
           console.log(usersWithStats);    
         }
       } 

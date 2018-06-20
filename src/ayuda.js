@@ -1,5 +1,3 @@
-const selectbtn = document.getElementById('select-cohorts');
-const listUsers = document.getElementById('container-user');
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 const urlCohorts = '../data/cohorts.json';
 const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
@@ -23,17 +21,17 @@ const addUserProgress = () => {
   
   const progress = (event) => {
     const progress = JSON.parse(event.target.responseText);
-
+   
     computeUsersStats(users,progress,courses);
 
   }
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
-  
 }
 getJSON(urlUser, addUserProgress);
 
-//FUNCION LISTA DE COHORTS
+
+/* //FUNCION LISTA DE COHORTS
 const addCohorts = (event) => {
   const data = JSON.parse(event.target.responseText);
   data.map((cohorts) => {
@@ -51,3 +49,4 @@ selectbtn.addEventListener('change', e => {
   }   
 });
 getJSON(urlCohorts, addCohorts) 
+ */
