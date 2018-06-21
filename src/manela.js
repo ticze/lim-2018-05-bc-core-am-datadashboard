@@ -1,4 +1,4 @@
-window.computeUsersStats = (users, progress, courses) => {
+/* window.computeUsersStats = (users, progress, courses) => {
     //console.log(users, progress, courses);
       let lista = users.map( user => {
       try {
@@ -152,4 +152,4 @@ window.computeUsersStats = (users, progress, courses) => {
             computeUsersStats(users, progress, courses);
           })
       })
-  };
+  }; */
