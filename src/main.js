@@ -22,6 +22,7 @@ const handleError = () => {
 //FUNCION DE LISTA DE USUARIO
 const addUsers = (event) => { 
   const data = JSON.parse(event.target.responseText);
+  console.log (data);
   data.map((usuario) => {
     let listUser = document.createElement('li');
     listUser.innerHTML = usuario.name;
@@ -50,7 +51,7 @@ getJSON(urlProgress,addProgress)
 const addCohorts = (event) => {
   const data = JSON.parse(event.target.responseText);
   data.map((cohorts) => {
-    let listCor = document.createElement('option');
+    const listCor = document.createElement('option');
     listCor.value = cohorts.id;
     listCor.innerHTML = cohorts.id;
     selectbtn.appendChild(listCor);

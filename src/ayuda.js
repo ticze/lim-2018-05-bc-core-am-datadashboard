@@ -20,11 +20,9 @@ const addUserProgress = () => {
 
   const users = JSON.parse(event.target.responseText);
   
-  const progress = (event) => {
+  const progress = ()=>{
     const progress = JSON.parse(event.target.responseText);
-
     computeUsersStats(users,progress,courses);
-
   }
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
