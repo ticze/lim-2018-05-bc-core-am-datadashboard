@@ -16,13 +16,15 @@ const handleError = () => {
 
 
 const addUserProgress = () => {
-  const courses = JSON.parse(event.target.responseText);
+ //const courses = JSON.parse(event.target.responseText);
+  const courses = ["intro"]
 
   const users = JSON.parse(event.target.responseText);
   
   const progress = ()=>{
     const progress = JSON.parse(event.target.responseText);
     computeUsersStats(users,progress,courses);
+      
   }
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
