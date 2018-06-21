@@ -15,6 +15,7 @@ const handleError = () => {
 }
 
 const addUserProgress = () => {
+<<<<<<< HEAD
   const users = JSON.parse(event.target.responseText);
 
   const addCohort = () => {
@@ -27,6 +28,17 @@ const addUserProgress = () => {
 
     }
     getJSON(urlProgress, progress);
+=======
+ //const courses = JSON.parse(event.target.responseText);
+  const courses = ["intro"]
+
+  const users = JSON.parse(event.target.responseText);
+  
+  const progress = ()=>{
+    const progress = JSON.parse(event.target.responseText);
+    computeUsersStats(users,progress,courses);
+      
+>>>>>>> cce87609f8cc66e33d54fae5ccd4e6f3a2239813
   }
   getJSON(urlCohorts, addCohort);
 }
