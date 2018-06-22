@@ -1,9 +1,5 @@
-//CREAANDO LAS  FUNCIONES
-
 window.computeUsersStats = (users, progress, courses) => {
-
   let lista = users.map(userWhitStats => {
-
     const exercisesTotal = (progress, courses) => {
       let cont = 0;
       courses.map((curso) => {
@@ -19,15 +15,12 @@ window.computeUsersStats = (users, progress, courses) => {
               cont += Object.keys(exercises).length
               // console.log(exercises)
             }
-
           });
-
         })
         //console.log(valorUnit)
         progress[curso].units
         //console.log(curso)
       })
-
       return cont
     };
 
@@ -50,23 +43,18 @@ window.computeUsersStats = (users, progress, courses) => {
                 if (valorcomplete.hasOwnProperty('completed')) {
                   const completado = valorcomplete.completed;
                   // console.log (completado)
-
                 }
               });
               // cont += Object.keys(exercises).length
               //console.log(exercises)
             }
-
           });
-
         })
         //console.log(valorUnit)
         progress[curso].units
         //console.log(curso)
       })
-
       return completado
-
     };
     try {
       userWhitStats.stats = {
@@ -74,16 +62,13 @@ window.computeUsersStats = (users, progress, courses) => {
         exercises: {
           total: exercisesTotal(progress[userWhitStats.id], courses),
           completed: completedTotal(progress[userWhitStats.id], courses),
-
         }
-
       }
       // console.log(userWhitStats)
       return userWhitStats;
     } catch (error) {
       return {};
     }
-
   })
 
   // console.log(lista);
