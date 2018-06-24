@@ -15,21 +15,35 @@ const handleError = () => {
 }
 
 const addUserProgress = () => {
+<<<<<<< HEAD
   const users = JSON.parse(event.target.responseText);
-  
+
   const addCohort = () => {
     const courses = JSON.parse(event.target.responseText);
 
     const progress = (event) => {
       const progress = JSON.parse(event.target.responseText);
-     
-      computeUsersStats(users,progress,courses);
-  
+
+      computeUsersStats(users, progress, courses);
+
     }
     getJSON(urlProgress, progress);
+=======
+ //const courses = JSON.parse(event.target.responseText);
+  const courses = ["intro"]
+
+  const users = JSON.parse(event.target.responseText);
+  
+  const progress = ()=>{
+    const progress = JSON.parse(event.target.responseText);
+    computeUsersStats(users,progress,courses);
+      
+>>>>>>> cce87609f8cc66e33d54fae5ccd4e6f3a2239813
   }
   getJSON(urlCohorts, addCohort);
 }
 getJSON(urlUser, addUserProgress);
 
+/* let nombre = computeUsersStats(users,progress,courses);
+sortUsers(nombre) */
 
