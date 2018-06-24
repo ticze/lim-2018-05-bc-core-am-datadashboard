@@ -31,7 +31,8 @@ window.computeUsersStats = (users, progress, courses) => {
                 }
               }
             };
-            let cursosCohort = cursos.coursesInd;
+            let cursosCohort = cursos.coursesIndex;
+            console.log(cursosCohort)
           }
         }
       });
