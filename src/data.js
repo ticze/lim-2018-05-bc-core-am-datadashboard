@@ -69,9 +69,6 @@ window.computeUsersStats = (users, progress, courses) => {
           total: exercisesTotal(progress[userWhitStats.id], courses),
           completed: completedTotal(progress[userWhitStats.id], courses),
           percent: completedTotal(progress[userWhitStats.id], courses) * 100 /  exercisesTotal(progress[userWhitStats.id], courses)  
-        },
-        reads: {
-          total : readsTotal()
         }
       }
       // console.log(userWhitStats)
