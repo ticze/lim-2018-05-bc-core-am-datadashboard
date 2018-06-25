@@ -20,6 +20,7 @@ img{
   background-color: #FFE521;
   width: 25%;
   height: -webkit-fill-available;
+  float: left;
 }
 #sedes{
   padding: 9px;
@@ -42,4 +43,5 @@ img{
   background-color: #eeeeee;
   float: right;
   width: 75%;
+  height: -webkit-fill-available;
 }

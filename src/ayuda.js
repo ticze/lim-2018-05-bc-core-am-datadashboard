@@ -16,14 +16,15 @@ const handleError = () => {
 
 
 const addUserProgress = () => {
- //const courses = JSON.parse(event.target.responseText);
   const users = JSON.parse(event.target.responseText);
 
   const cohorts = () =>{
     const courses = ["intro"];
+    //const courses = JSON.parse(event.target.responseText);
 
     const progress = ()=>{
       const progress = JSON.parse(event.target.responseText);
+     
       computeUsersStats(users,progress,courses);
         
     }
@@ -34,4 +35,4 @@ const addUserProgress = () => {
 getJSON(urlUser, addUserProgress);
 
 
-
+/* let datacomputer = computeUsersStats(users,progress,courses); */
