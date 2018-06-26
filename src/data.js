@@ -1,67 +1,74 @@
 window.computeUsersStats = (users, progress, courses) => {
-  let lista = users.map(userWhitStats => {
-    const exercisesTotal = (progress, courses) => {
-      let cont = 0;
-      courses.map((curso) => {
-        const valorUnit = Object.keys(progress[curso].units);
-        valorUnit.map((nombreUnidad) => {
-          //console.log (nombreUnidad)
-          const valorParts = Object.keys(progress[curso].units[nombreUnidad].parts);
-          //console.log(nombreUnidad, valorParts)
-          valorParts.map(nombrePart => {
-            const part = progress[curso].units[nombreUnidad].parts[nombrePart]
-            if (part.hasOwnProperty('exercises')) {
-              const exercises = part.exercises;
-              cont += Object.keys(exercises).length
-              // console.log(exercises)
-            }
-          });
-        })
-        //console.log(valorUnit)
-        progress[curso].units
-        //console.log(curso)
+  //FUNCION DE EJERCICIOS
+  const exercisesTotal = (progress, courses) => {
+    let cont = 0;
+    courses.map((curso) => {
+      const valorUnit = Object.keys(progress[curso].units);
+      valorUnit.map((nombreUnidad) => {
+        //console.log (nombreUnidad)
+        const valorParts = Object.keys(progress[curso].units[nombreUnidad].parts);
+        //console.log(nombreUnidad, valorParts)
+        valorParts.map(nombrePart => {
+          //console.log(nombrePart)
+          const part = progress[curso].units[nombreUnidad].parts[nombrePart]
+          //console.log(nombreUnidad, valorParts,nombrePart,part)
+          if (part.hasOwnProperty('exercises')) {
+            const exercises = part.exercises;
+            cont += Object.keys(exercises).length
+            //console.log(exercises);
+          }
+        });
       })
-      return cont
-    };
+      //console.log(valorUnit)
+      progress[curso].units
+      //console.log(curso)
+    })
+    return cont
+  };
 
-    const completedTotal = (progress, courses) => {
-      let cont = 0;
-      courses.map((curso) => {
-        const valorUnit = Object.keys(progress[curso].units);
-        valorUnit.map((nombreUnidad) => {
-          //console.log (nombreUnidad)
-          const valorParts = Object.keys(progress[curso].units[nombreUnidad].parts);
-          //console.log(nombreUnidad, valorParts)
-          valorParts.map(nombrePart => {
-            const part = progress[curso].units[nombreUnidad].parts[nombrePart]
-            if (part.hasOwnProperty('exercises')) {
-              const exercises = part.exercises;
-              const complite = Object.keys(progress[curso].units[nombreUnidad].parts[nombrePart].exercises)
-              complite.map((valorcomple) => {
-                const valorcomplete = progress[curso].units[nombreUnidad].parts[nombrePart].exercises[valorcomple]
-                //console.log (valorcomple)
-                if (valorcomplete.hasOwnProperty('completed')) {
-                  const completado = valorcomplete.completed;
-                  // console.log (completado)
-                }
-              });
-              // cont += Object.keys(exercises).length
-              //console.log(exercises)
+  const completedTotal = (progress, courses) => {
+    let contCompletado = 0;
+    courses.map((curso) => {
+      const valorUnit = Object.keys(progress[curso].units);
+      valorUnit.map((nombreUnidad) => {
+        //console.log (nombreUnidad)
+        const valorParts = Object.keys(progress[curso].units[nombreUnidad].parts);
+        //console.log(nombreUnidad, valorParts)
+        valorParts.map(nombrePart => {
+          //console.log(valorParts, nombrePart)
+          const part = progress[curso].units[nombreUnidad].parts[nombrePart]
+         // console.log(part)
+         if (part.hasOwnProperty('exercises')) {
+          const exercises = part.exercises;
+          const exercisesNames = Object.keys(exercises)
+          exercisesNames.map((nameExercise) => {
+            //console.log(nameExercise)
+            const valorCompleted = exercises[nameExercise]
+            if(typeof(valorCompleted) === 'number'){
+              contCompletado += valorCompleted
+            } else {
+              contCompletado += valorCompleted.completed
             }
-          });
-        })
-        //console.log(valorUnit)
-        progress[curso].units
-        //console.log(curso)
+          })
+        }
+        });
       })
-      return completado
-    };
+      //console.log(valorUnit)
+      progress[curso].units
+      //console.log(curso)
+    })
+    return contCompletado
+  }; 
+
+  let lista = users.map(userWhitStats => {
+
     try {
       userWhitStats.stats = {
         percent: progress[userWhitStats.id].intro.percent,
         exercises: {
           total: exercisesTotal(progress[userWhitStats.id], courses),
           completed: completedTotal(progress[userWhitStats.id], courses),
+          percent: completedTotal(progress[userWhitStats.id], courses) * 100 /  exercisesTotal(progress[userWhitStats.id], courses)  
         }
       }
       // console.log(userWhitStats)
@@ -70,27 +77,20 @@ window.computeUsersStats = (users, progress, courses) => {
       return {};
     }
   })
-
-  // console.log(lista);
+  console.log(lista);
   return lista;
-
   //const courses = ["intro"]
   //["intro"]
-  //FUNCION DE EJERCICIOS
-
-
-
 };
-
 
 //Funcion para Ordenar
 window.sortUsers = (users, orderBy, orderDirection) => {
-
 };
 
-
 window.filterUsers = (users, search) => {
-
 }
+
+window.processCohortData = (options) => {
+};
 
 

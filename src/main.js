@@ -28,11 +28,9 @@ const addUserProgress = () => {
   const progress = () => {
     const progress = JSON.parse(event.target.responseText);
     computeUsersStats(users, progress, courses);
-
   }
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
-
 }
 getJSON(urlUser, addUserProgress);
 
@@ -56,7 +54,7 @@ const addCohorts = (event) => {
     listCor.value = cohorts.id;
     listCor.innerHTML = cohorts.id;
     selectbtn.appendChild(listCor);
-  });
+  });  
 }
 
 selectbtn.addEventListener('change', e => {
@@ -66,7 +64,7 @@ selectbtn.addEventListener('change', e => {
   }   
  });
 
- getJSON(urlCohorts, addCohorts) 
+//getJSON(urlCohorts, addCohorts) 
 
  
 
