@@ -1,47 +1,89 @@
-/*estilos del encabezado*/
-header{
-  background-color: #FFE521;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #ffffff;
   display: inline-block;
   height: 100px;
   width: 100%;
   margin: 0%;
 }
 figure{
-  margin: 0;
-  height: 100px;  
-  text-align: center;
+margin: 0;
+height: 100px;  
+text-align: center;
 }
 img{
-  margin: 0;
-  height: 100px;
+margin: 0;
+height: 100px;
 }
-/*estilos del menu*/
-#menu{
-  background-color: #FFE521;
-  width: 25%;
-  height: -webkit-fill-available;
+
+/* Create two columns/boxes that floats next to each other */
+nav {
   float: left;
+  width: 30%;
+  height: 300px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 10px;
 }
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.vertical-menu a {
+background-color: #eee;
+color: black;
+display: block;
+padding: 12px;
+text-decoration: none;
+}
+
+
+.vertical-menu a:hover {
+background-color: #ccc;
+}
+
+.vertical-menu a.active {
+background-color: #ccc;
+color: white;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; 
+}
+
 #sedes{
-  padding: 9px;
+padding: 9px;
 }
 #select-cohorts{
-  width: 100%;
+width: 100%;
 }
-#btnAlumnas{
-  padding: 3px;
+
+
+/* Clear floats after the columns */
+section:after {
+  content: "";
+  display: table;
+  clear: both;
 }
-#btnMostrarUser{
-  text-align: center;
-  text-decoration-color: #333333;
-  border-radius: 8px;
-  float: left;
-  font-family: Bitter Regular;
-}
-/*estilos de contenido*/
-#contenido{
-  background-color: #eeeeee;
-  float: right;
-  width: 75%;
-  height: -webkit-fill-available;
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+      width: 100%;
+      height: auto;
+  }
 }
