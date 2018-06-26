@@ -1,17 +1,15 @@
-/* const btnUser = document.getElementById('btnMostrarUser');
-const selectbtn = document.getElementById('select-cohorts');
-const listUsers = document.getElementById('container-user');
 const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 const urlCohorts = '../data/cohorts.json';
 const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+const btnUser = document.getElementById('btnMostrarUser');
+const selectbtn = document.getElementById('select-cohorts');
+const listUsers = document.getElementById('container-user');
+
 
 const getJSON = (url, callback) => {
-  //Creamos nuestro Objeto
   const request = new XMLHttpRequest();
   request.open('GET', url);
-  //La funcion onload se le asigna la funcion callback
   request.onload = callback;
-  //La funcion onerror tiene asignado la funcion handleError 
   request.onerror = handleError;
   request.send();
 }
@@ -19,6 +17,24 @@ const getJSON = (url, callback) => {
 const handleError = () => {
   console.log('Se ha presentado un error');
 }
+
+
+const addUserProgress = () => {
+  //const courses = JSON.parse(event.target.responseText);
+  const courses = ["intro"]
+
+  const users = JSON.parse(event.target.responseText);
+
+  const progress = () => {
+    const progress = JSON.parse(event.target.responseText);
+    computeUsersStats(users, progress, courses);
+  }
+  getJSON(urlProgress, progress);
+  getJSON(urlCohorts, courses);
+}
+getJSON(urlUser, addUserProgress);
+
+
 //FUNCION DE LISTA DE USUARIO
 const addUsers = (event) => { 
   const data = JSON.parse(event.target.responseText);
@@ -29,23 +45,6 @@ const addUsers = (event) => {
     listUsers.appendChild(listUser);
   }); 
 }
-//FUNCION DE ID DE USUARIO
-const addId = (event) => { 
-  //debugger
-  const data = JSON.parse(event.target.responseText);
-  data.map((usuario) => {
-    let listUser = document.createElement('li');
-    listUser.innerHTML = usuario.id;
-    listUsers.appendChild(listUser);
-  }); 
-}
-//FUNCION DEL PROGRESO
-const addProgress = (event) => {
-  const data = JSON.parse(event.target.responseText); 
-  const keyAddProgress = Object.keys(data);
-  console.log(keyAddProgress);
-}
-getJSON(urlProgress,addProgress)
 
 //FUNCION LISTA DE COHORTS
 const addCohorts = (event) => {
@@ -55,7 +54,7 @@ const addCohorts = (event) => {
     listCor.value = cohorts.id;
     listCor.innerHTML = cohorts.id;
     selectbtn.appendChild(listCor);
-  });
+  });  
 }
 
 selectbtn.addEventListener('change', e => {
@@ -65,10 +64,8 @@ selectbtn.addEventListener('change', e => {
   }   
  });
 
-btnUser.addEventListener('click',(e) => {
-  e.preventDefault();
-  getJSON(urlUser, addUsers);
-});
+//getJSON(urlCohorts, addCohorts) 
 
-getJSON(urlCohorts, addCohorts) */
  
+
+
