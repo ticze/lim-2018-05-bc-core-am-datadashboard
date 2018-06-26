@@ -6,8 +6,6 @@ const selectbtn = document.getElementById('select-cohorts');
 const listUsers = document.getElementById('container-user');
 const buscarUser = document.getElementById('busca-users');
 
-
-
 const getJSON = (url, callback) => {
   const request = new XMLHttpRequest();
   request.open('GET', url);
@@ -25,13 +23,14 @@ const addUserProgress = () => {
   const cohorts = JSON.parse(event.target.responseText);
   const courses = ["intro"]
   
-
   const users = JSON.parse(event.target.responseText);  
 
   const progress = () => {
     const progress = JSON.parse(event.target.responseText);
-    const usersWithStats =computeUsersStats(users, progress, courses);
-    /* const options = {
+    const usersWithStats = computeUsersStats(users, progress, courses);
+    //console.log(computeUsers)
+    sortUsers(usersWithStats, ' ')
+        /* const options = {
       cohortData: {
         users: users,
         progress: progress
@@ -40,22 +39,34 @@ const addUserProgress = () => {
     let usersWithStats = processCohortData(options); */
     //let usersWithStats = computeUsersStats(users, progress, courses);
     //let usersWithStatsSorted = sortUsers(usersWithStats, "nombre", "ASC");     
-
   }
-  
   //sortUsers(users, orderBy, orderDirection);
-
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
-
 }
 getJSON(urlUser, addUserProgress);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 
 //FUNCION DE LISTA DE USUARIO
 const addUsers = (event) => { 
   const data = JSON.parse(event.target.responseText);
-  console.log (data);
+  //console.log (data);
   data.map((usuario) => {
     let listUser = document.createElement('li');
     listUser.innerHTML = usuario.name;
@@ -87,12 +98,12 @@ selectbtn.addEventListener('change', e => {
  //EVENTO PARA BUSCAR 
 buscarUser.addEventListener('keypress',(event)=>{
   const enter = event.which || event.keyCode;
-  if (enter ===13){
+  if (enter === 13){
     let valorBusqueda = buscarUser.value;
     //let mostrarloquesebusco = window.filterUsers(usersWithStats,valorBusqueda);
     let mostrarloquesebusco = window.filterUsers(addUsers,valorBusqueda);
     
-    console.log (mostrarloquesebusco);
+    //console.log (mostrarloquesebusco);
     //impirmirlista (mostrarlo que busco en html);
     buscarUser.value='';
 

@@ -1,6 +1,5 @@
 window.computeUsersStats = (users, progress, courses) => {
   let lista = users.map(usersWithStats => {
-
     const exercisesTotal = (progress, courses) => {
       let cont = 0;
       courses.map((curso) => {
@@ -204,22 +203,41 @@ window.computeUsersStats = (users, progress, courses) => {
     }
 
   })
-  console.log(lista);
+  //console.log(lista);
   return lista;
-}
-
-//Funcion para Ordenar
-window.sortUsers = (users, orderBy, orderDirection) => {
 };
+
+window.sortUsers = (users, orderBy) => {
+  //console.log(users,text)
+  const sortName = users.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  })
+  console.log(sortName)
+
+  /*   const sortPercent = users.sort((a, b) => {
+      if (a.stats.percent > b.stats.percent) {
+        return 1;
+      }
+      if (a.stats.percent < b.stats.percent) {
+        return -1;
+      }
+      return 0;
+    })
+    console.log(sortPercent) */
+};
+
 
 window.filterUsers = (users, search) => {
-  let buscarUsser = users.filter((listaUser)=>listaUser.name.includes(search))
+  let buscarUsser = users.filter((listaUser) => listaUser.name.includes(search))
   return buscarUsser;
-
-}
-
-window.processCohortData = (options) => {
 
 };
 
-
+window.processCohortData = (options) => {
+};
