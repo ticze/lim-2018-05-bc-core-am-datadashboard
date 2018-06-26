@@ -19,18 +19,33 @@ const handleError = () => {
 }
 
 
- const addUserProgress = () => {
-  const courses = JSON.parse(event.target.responseText);
-  //const courses = ["intro"]
+const addUserProgress = () => {
+  const cohorts = JSON.parse(event.target.responseText);
+  const courses = ["intro"]
+  
 
-  const users = JSON.parse(event.target.responseText);
+  const users = JSON.parse(event.target.responseText);  
 
   const progress = () => {
     const progress = JSON.parse(event.target.responseText);
     computeUsersStats(users, progress, courses);
+    /* const options = {
+      cohortData: {
+        users: users,
+        progress: progress
+      }
+    };
+    let usersWithStats = processCohortData(options); */
+    //let usersWithStats = computeUsersStats(users, progress, courses);
+    //let usersWithStatsSorted = sortUsers(usersWithStats, "nombre", "ASC");     
+
   }
+  
+  //sortUsers(users, orderBy, orderDirection);
+
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
+
 }
 getJSON(urlUser, addUserProgress);
  
