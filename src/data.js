@@ -1,5 +1,6 @@
 window.computeUsersStats = (users, progress, courses) => {
   //FUNCION DE EJERCICIOS
+  //EJERCICIOS
   const exercisesTotal = (progress, courses) => {
     let cont = 0;
     courses.map((curso) => {
@@ -59,6 +60,16 @@ window.computeUsersStats = (users, progress, courses) => {
     })
     return contCompletado
   }; 
+  //READS
+  const readsTotal = (progress, courses) => {
+    let contReads = 0;
+    courses.map((curso) => {
+      const valorUnit = Object.keys(progress[curso].units);
+      console.log(valorUnit)
+      valorUnit.map((nameUnity) =>{
+      })
+    })
+  };
 
   let lista = users.map(userWhitStats => {
 
@@ -69,6 +80,9 @@ window.computeUsersStats = (users, progress, courses) => {
           total: exercisesTotal(progress[userWhitStats.id], courses),
           completed: completedTotal(progress[userWhitStats.id], courses),
           percent: completedTotal(progress[userWhitStats.id], courses) * 100 /  exercisesTotal(progress[userWhitStats.id], courses)  
+        },
+        reads :{
+          total : readsTotal(progress[userWhitStats.id], courses),
         }
       }
       // console.log(userWhitStats)
@@ -77,7 +91,7 @@ window.computeUsersStats = (users, progress, courses) => {
       return {};
     }
   })
-  console.log(lista);
+  //console.log(lista);
   return lista;
   //const courses = ["intro"]
   //["intro"]
