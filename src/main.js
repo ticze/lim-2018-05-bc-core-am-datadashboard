@@ -4,6 +4,8 @@ const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 const btnUser = document.getElementById('btnMostrarUser');
 const selectbtn = document.getElementById('select-cohorts');
 const listUsers = document.getElementById('container-user');
+const buscarUser = document.getElementById('busca-users');
+
 
 
 const getJSON = (url, callback) => {
@@ -19,18 +21,33 @@ const handleError = () => {
 }
 
 
- const addUserProgress = () => {
-  const courses = JSON.parse(event.target.responseText);
-  //const courses = ["intro"]
+const addUserProgress = () => {
+  const cohorts = JSON.parse(event.target.responseText);
+  const courses = ["intro"]
+  
 
-  const users = JSON.parse(event.target.responseText);
+  const users = JSON.parse(event.target.responseText);  
 
   const progress = () => {
     const progress = JSON.parse(event.target.responseText);
-    computeUsersStats(users, progress, courses);
+    const usersWithStats =computeUsersStats(users, progress, courses);
+    /* const options = {
+      cohortData: {
+        users: users,
+        progress: progress
+      }
+    };
+    let usersWithStats = processCohortData(options); */
+    //let usersWithStats = computeUsersStats(users, progress, courses);
+    //let usersWithStatsSorted = sortUsers(usersWithStats, "nombre", "ASC");     
+
   }
+  
+  //sortUsers(users, orderBy, orderDirection);
+
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
+
 }
 getJSON(urlUser, addUserProgress);
  
@@ -62,8 +79,26 @@ selectbtn.addEventListener('change', e => {
   e.preventDefault();
   if(selectbtn.value === 'lim-2018-03-pre-core-pw') {
     getJSON(urlUser,addUsers);
+  // getJSON(urlUser, addUserProgress);
   }   
  });
+
+
+ //EVENTO PARA BUSCAR 
+buscarUser.addEventListener('keypress',(event)=>{
+  const enter = event.which || event.keyCode;
+  if (enter ===13){
+    let valorBusqueda = buscarUser.value;
+    //let mostrarloquesebusco = window.filterUsers(usersWithStats,valorBusqueda);
+    let mostrarloquesebusco = window.filterUsers(addUsers,valorBusqueda);
+    
+    console.log (mostrarloquesebusco);
+    //impirmirlista (mostrarlo que busco en html);
+    buscarUser.value='';
+
+  }
+
+});
 
 //getJSON(urlCohorts, addCohorts) 
 

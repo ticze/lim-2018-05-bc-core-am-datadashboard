@@ -213,7 +213,13 @@ window.sortUsers = (users, orderBy, orderDirection) => {
 };
 
 window.filterUsers = (users, search) => {
+  let buscarUsser = users.filter((listaUser)=>listaUser.name.includes(search))
+  return buscarUsser;
+
 }
 
 window.processCohortData = (options) => {
+
 };
+
+
