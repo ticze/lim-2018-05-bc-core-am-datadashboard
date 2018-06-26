@@ -19,7 +19,7 @@ const handleError = () => {
 }
 
 
-/* const addUserProgress = () => {
+ const addUserProgress = () => {
   const courses = JSON.parse(event.target.responseText);
   //const courses = ["intro"]
 
@@ -33,7 +33,7 @@ const handleError = () => {
   getJSON(urlCohorts, courses);
 }
 getJSON(urlUser, addUserProgress);
- */
+ 
 
 //FUNCION DE LISTA DE USUARIO
 const addUsers = (event) => { 
