@@ -19,9 +19,9 @@ const handleError = () => {
 }
 
 
-const addUserProgress = () => {
-  //const courses = JSON.parse(event.target.responseText);
-  const courses = ["intro"]
+/* const addUserProgress = () => {
+  const courses = JSON.parse(event.target.responseText);
+  //const courses = ["intro"]
 
   const users = JSON.parse(event.target.responseText);
 
@@ -33,7 +33,7 @@ const addUserProgress = () => {
   getJSON(urlCohorts, courses);
 }
 getJSON(urlUser, addUserProgress);
-
+ */
 
 //FUNCION DE LISTA DE USUARIO
 const addUsers = (event) => { 
@@ -56,6 +56,7 @@ const addCohorts = (event) => {
     selectbtn.appendChild(listCor);
   });  
 }
+getJSON(urlCohorts,addCohorts);
 
 selectbtn.addEventListener('change', e => {
   e.preventDefault();
