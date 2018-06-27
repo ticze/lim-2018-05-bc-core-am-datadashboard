@@ -28,8 +28,14 @@ const addUserProgress = () => {
   const progress = () => {
     const progress = JSON.parse(event.target.responseText);
     const usersWithStats = computeUsersStats(users, progress, courses);
-    //console.log(computeUsers)
-    sortUsers(usersWithStats, ' ')
+
+    //console.log(sortUsers(usersWithStats, 'name'))
+    sortUsers(usersWithStats, 'percent')  
+    sortUsers(usersWithStats, 'excercises-percent')
+    sortUsers(usersWithStats, 'quizzes-percent')
+    sortUsers(usersWithStats, 'quizzes-scoreAvg')
+    sortUsers(usersWithStats, 'reads-percent')
+
         /* const options = {
       cohortData: {
         users: users,

@@ -1,14 +1,17 @@
 window.computeUsersStats = (users, progress, courses) => {
-  let lista = users.map(usersWithStats => {
+  console.log(users[725])
+  let lista = users.map((usersWithStats, i) => {
+    
     const exercisesTotal = (progress, courses) => {
       let cont = 0;
       courses.map((curso) => {
+        //console.log(curso)
         const valorUnits = Object.keys(progress[curso].units);
         //console.log(valorUnits)
         valorUnits.map((nombreUnits) => {
           //console.log (nombreUnits);
           const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-          // console.log(valorParts)
+          //console.log(valorParts)
           valorParts.map((nombreParts) => {
             const valorExcercises = progress[curso].units[nombreUnits].parts[nombreParts];
             //console.log (valorExcercises)
@@ -174,42 +177,45 @@ window.computeUsersStats = (users, progress, courses) => {
       return cont
 
     }
-
-
-    try {
-      usersWithStats.stats = {
-        percent: progress[usersWithStats.id].intro.percent,
-        exercises: {
-          total: exercisesTotal(progress[usersWithStats.id], courses),
-          completed: exercisesCompleted(progress[usersWithStats.id], courses),
-          percent: (exercisesCompleted(progress[usersWithStats.id], courses) / exercisesTotal(progress[usersWithStats.id], courses)) * 100,
-        },
-        reads: {
-          total: readTotal(progress[usersWithStats.id], courses),
-          completed: readCompleted(progress[usersWithStats.id], courses),
-          percent: Math.round((readCompleted(progress[usersWithStats.id], courses) / readTotal(progress[usersWithStats.id], courses)) * 100)
-        },
-        quizzes: {
-          total: quizTotal(progress[usersWithStats.id], courses),
-          completed: quizCompleted(progress[usersWithStats.id], courses),
-          percent: Math.round((quizCompleted(progress[usersWithStats.id], courses) / quizTotal(progress[usersWithStats.id], courses)) * 100),
-          scoreSum: quizScoreSum(progress[usersWithStats.id], courses),
-          scoreAvg: Math.round(quizScoreSum(progress[usersWithStats.id], courses) / quizCompleted(progress[usersWithStats.id], courses)),
+// console.log(usersWithStats, i)
+    if (i === 22) {
+      debugger
+    }
+    if(usersWithStats){
+      if (progress.hasOwnProperty(usersWithStats.id)) {
+        usersWithStats.stats = {
+          percent: progress[usersWithStats.id].intro.percent,
+          exercises: {
+            total: exercisesTotal(progress[usersWithStats.id], courses),
+            completed: exercisesCompleted(progress[usersWithStats.id], courses),
+            percent: (exercisesCompleted(progress[usersWithStats.id], courses) / exercisesTotal(progress[usersWithStats.id], courses)) * 100,
+          },
+          reads: {
+            total: readTotal(progress[usersWithStats.id], courses),
+            completed: readCompleted(progress[usersWithStats.id], courses),
+            percent: Math.round((readCompleted(progress[usersWithStats.id], courses) / readTotal(progress[usersWithStats.id], courses)) * 100)
+          },
+          quizzes: {
+            total: quizTotal(progress[usersWithStats.id], courses),
+            completed: quizCompleted(progress[usersWithStats.id], courses),
+            percent: Math.round((quizCompleted(progress[usersWithStats.id], courses) / quizTotal(progress[usersWithStats.id], courses)) * 100),
+            scoreSum: quizScoreSum(progress[usersWithStats.id], courses),
+            scoreAvg: Math.round(quizScoreSum(progress[usersWithStats.id], courses) / quizCompleted(progress[usersWithStats.id], courses)),
+          }
         }
       }
       return usersWithStats;
-    } catch (error) {
-      return {};
-    }
+    } 
 
   })
   //console.log(lista);
   return lista;
 };
 
-window.sortUsers = (users, orderBy) => {
-  //console.log(users,text)
-  const sortName = users.sort((a, b) => {
+window.sortUsers = (users, orderBy, orderDirection) => {
+  // console.log(users)
+  users.map((user, i) => console.log(i,user))
+  const sortByName = (a, b) => {
     if (a.name > b.name) {
       return 1;
     }
@@ -217,26 +223,77 @@ window.sortUsers = (users, orderBy) => {
       return -1;
     }
     return 0;
-  })
-  console.log(sortName)
+  }
+  
+  const sortByPercent = (a,b) => {
+    if (a.stats.percent > b.stats.percent) {
+      return 1;
+    }
+    if (a.stats.percent < b.stats.percent) {
+      return -1;
+    }
+    return 0;
+  }
 
-  /*   const sortPercent = users.sort((a, b) => {
-      if (a.stats.percent > b.stats.percent) {
-        return 1;
-      }
-      if (a.stats.percent < b.stats.percent) {
-        return -1;
-      }
-      return 0;
-    })
-    console.log(sortPercent) */
+  const sortByExcercisePercent = (a, b) => {
+    if (a.stats.excersices.percent > b.stats.excencises.percent) {
+      return 1;
+    }
+    if (a.stats.excersices.percent > b.stats.excencises.percent) {
+      return -1;
+    }
+    return 0;
+  }
+
+  const sortByQuizzesPercent =  (a, b) => {
+    if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
+      return 1;
+    }
+    if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
+      return -1;
+    }
+    return 0;
+  }
+
+  const sortByQuizzesScoreAvg =  (a, b) => {
+    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg ) {
+      return 1;
+    }
+    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg ) {
+      return -1;
+    }
+    return 0;
+  }
+  
+  const sortByReadsPercent =  (a, b) => {
+    if (a.stats.reads.percent > b.stats.reads.percent) {
+      return 1;
+    }
+    if (a.stats.reads.percent > b.stats.reads.percent) {
+      return -1;
+    }
+    return 0;
+  }
+
+  let sorted;
+  if (orderBy === 'name') {
+    sorted = users.sort(sortByName)
+  } else if (orderBy === 'percent') {
+    sorted = users.sort(sortByPercent)
+  } else if (orderBy === 'excercises-percent') {
+    sorted = users.sort(sortByExcercisePercent)
+  }else if (orderBy === 'quizzes-percent') {
+    sorted = users.sort(sortByQuizzesPercent)
+  }else if (orderBy === 'quizzes-scoreAvg') {
+    sorted = users.sort(sortByQuizzesScoreAvg)
+  }else if (orderBy === 'reads-percent') {
+    sorted = users.sort(sortByReadsPercent)
+  }  
+  return sorted
 };
 
 
 window.filterUsers = (users, search) => {
-  let buscarUsser = users.filter((listaUser) => listaUser.name.includes(search))
-  return buscarUsser;
-
 };
 
 window.processCohortData = (options) => {
