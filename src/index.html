@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" href="../img/Laboratoria_CMYK_logo-11.png" type="image/x-icon">
-  <link rel="stylesheet" href="style.css" /> 
+  <link rel="stylesheet" href="style.css" />
   <title>Data Dashboard</title>
 </head>
+
 <body>
   <header>
     <figure>
       <img src="../img/Laboratoria_CMYK_logo-03.png">
     </figure>
-  </header>  
+  </header>
   <section>
     <nav class="vertical-menu">
       <ul>
@@ -32,15 +34,30 @@
       <div id="sedes">
         <select id="select-cohorts"></select>
         <p>Buscar</p>
-        <input type="search" id ="busca-users">
+        <input type="text" id='busca-users'>
+        <div>
+          <select name="" id="orderBy">
+            <option value="name">name</option>
+            <option value="percent">percent</option>
+            <option value="excercises-percent">ExcercisePercent</option>
+            <option value="quizzes-percent">QuizzesPercent</option>
+            <option value="quizzes-scoreAvg">QuizzesScoreAvg</option>
+            <option value="reads-percent">ReadsPercent</option>
+          </select>
+          <input type="checkbox" value="asc">Asc
+          <input type="checkbox" value="desc">Desc
+        </div>
+
       </div>
-      
-      <div>
-        <ul id="container-user"></ul>
+      <div class="vertical-menu1">
+        <ul id="container-user">
+        </ul>
       </div>
+
     </article>
   </section>
   <script src="main.js"></script>
   <script src="data.js"></script>
 </body>
+
 </html>

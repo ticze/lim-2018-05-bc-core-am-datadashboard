@@ -1,17 +1,15 @@
 window.computeUsersStats = (users, progress, courses) => {
-  console.log(users[725])
-  let lista = users.map((usersWithStats, i) => {
-    
+  let lista = users.map(usersWithStats => {
+
     const exercisesTotal = (progress, courses) => {
       let cont = 0;
       courses.map((curso) => {
-        //console.log(curso)
         const valorUnits = Object.keys(progress[curso].units);
         //console.log(valorUnits)
         valorUnits.map((nombreUnits) => {
           //console.log (nombreUnits);
           const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-          //console.log(valorParts)
+          // console.log(valorParts)
           valorParts.map((nombreParts) => {
             const valorExcercises = progress[curso].units[nombreUnits].parts[nombreParts];
             //console.log (valorExcercises)
@@ -177,55 +175,63 @@ window.computeUsersStats = (users, progress, courses) => {
       return cont
 
     }
-// console.log(usersWithStats, i)
-    if (i === 22) {
-      debugger
-    }
-    if(usersWithStats){
-      if (progress.hasOwnProperty(usersWithStats.id)) {
-        usersWithStats.stats = {
-          percent: progress[usersWithStats.id].intro.percent,
-          exercises: {
-            total: exercisesTotal(progress[usersWithStats.id], courses),
-            completed: exercisesCompleted(progress[usersWithStats.id], courses),
-            percent: (exercisesCompleted(progress[usersWithStats.id], courses) / exercisesTotal(progress[usersWithStats.id], courses)) * 100,
-          },
-          reads: {
-            total: readTotal(progress[usersWithStats.id], courses),
-            completed: readCompleted(progress[usersWithStats.id], courses),
-            percent: Math.round((readCompleted(progress[usersWithStats.id], courses) / readTotal(progress[usersWithStats.id], courses)) * 100)
-          },
-          quizzes: {
-            total: quizTotal(progress[usersWithStats.id], courses),
-            completed: quizCompleted(progress[usersWithStats.id], courses),
-            percent: Math.round((quizCompleted(progress[usersWithStats.id], courses) / quizTotal(progress[usersWithStats.id], courses)) * 100),
-            scoreSum: quizScoreSum(progress[usersWithStats.id], courses),
-            scoreAvg: Math.round(quizScoreSum(progress[usersWithStats.id], courses) / quizCompleted(progress[usersWithStats.id], courses)),
-          }
+
+    try {
+
+      usersWithStats.stats = {
+        percent: progress[usersWithStats.id].intro.percent,
+        exercises: {
+          total: exercisesTotal(progress[usersWithStats.id], courses),
+          completed: exercisesCompleted(progress[usersWithStats.id], courses),
+          percent: (exercisesCompleted(progress[usersWithStats.id], courses) / exercisesTotal(progress[usersWithStats.id], courses)) * 100,
+        },
+        reads: {
+          total: readTotal(progress[usersWithStats.id], courses),
+          completed: readCompleted(progress[usersWithStats.id], courses),
+          percent: Math.round((readCompleted(progress[usersWithStats.id], courses) / readTotal(progress[usersWithStats.id], courses)) * 100)
+        },
+        quizzes: {
+          total: quizTotal(progress[usersWithStats.id], courses),
+          completed: quizCompleted(progress[usersWithStats.id], courses),
+          percent: Math.round((quizCompleted(progress[usersWithStats.id], courses) / quizTotal(progress[usersWithStats.id], courses)) * 100),
+          scoreSum: quizScoreSum(progress[usersWithStats.id], courses),
+          scoreAvg: Math.round(quizScoreSum(progress[usersWithStats.id], courses) / quizCompleted(progress[usersWithStats.id], courses)),
         }
       }
       return usersWithStats;
-    } 
+    } catch (error) {
+      return usersWithStats.stats = {
+        id: usersWithStats.id,
+        ignupCohort: usersWithStats.ignupCohort,
+        timezone: usersWithStats.timezone,
+        name: usersWithStats.name,
+        locale: usersWithStats.locale,
+        role: usersWithStats.role
+      };
+
+    }
 
   })
   //console.log(lista);
   return lista;
 };
 
+//Funcion para Ordenar
 window.sortUsers = (users, orderBy, orderDirection) => {
-  // console.log(users)
-  users.map((user, i) => console.log(i,user))
+  //console.log(users)
   const sortByName = (a, b) => {
-    if (a.name > b.name) {
+    const obj1 = a.name.toUpperCase();
+    const obj2 = b.name.toUpperCase();
+    if (obj1 > obj2) {
       return 1;
     }
-    if (a.name < b.name) {
+    if (obj1 < obj2) {
       return -1;
     }
     return 0;
   }
-  
-  const sortByPercent = (a,b) => {
+
+  const sortByPercent = (a, b) => {
     if (a.stats.percent > b.stats.percent) {
       return 1;
     }
@@ -245,7 +251,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     return 0;
   }
 
-  const sortByQuizzesPercent =  (a, b) => {
+  const sortByQuizzesPercent = (a, b) => {
     if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
       return 1;
     }
@@ -255,17 +261,17 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     return 0;
   }
 
-  const sortByQuizzesScoreAvg =  (a, b) => {
-    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg ) {
+  const sortByQuizzesScoreAvg = (a, b) => {
+    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
       return 1;
     }
-    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg ) {
+    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
       return -1;
     }
     return 0;
   }
-  
-  const sortByReadsPercent =  (a, b) => {
+
+  const sortByReadsPercent = (a, b) => {
     if (a.stats.reads.percent > b.stats.reads.percent) {
       return 1;
     }
@@ -278,23 +284,40 @@ window.sortUsers = (users, orderBy, orderDirection) => {
   let sorted;
   if (orderBy === 'name') {
     sorted = users.sort(sortByName)
-  } else if (orderBy === 'percent') {
+  }  /* else if (orderBy === 'percent') {
     sorted = users.sort(sortByPercent)
   } else if (orderBy === 'excercises-percent') {
     sorted = users.sort(sortByExcercisePercent)
-  }else if (orderBy === 'quizzes-percent') {
+  } else if (orderBy === 'quizzes-percent') {
     sorted = users.sort(sortByQuizzesPercent)
-  }else if (orderBy === 'quizzes-scoreAvg') {
+  } else if (orderBy === 'quizzes-scoreAvg') {
     sorted = users.sort(sortByQuizzesScoreAvg)
-  }else if (orderBy === 'reads-percent') {
+  } else if (orderBy === 'reads-percent') {
     sorted = users.sort(sortByReadsPercent)
-  }  
+  }  */
+  //const retro = sorted.reverse()
   return sorted
 };
 
-
 window.filterUsers = (users, search) => {
+  //console.log('hola soy el array' + users);
+  //console.log('hola soy el texto del user' + search);
+
+  let buscarUser = users.filter(listaUser => listaUser.name.includes(search))
+  //console.log (buscarUser);
+  return buscarUser;
+
+  /* const userFilter = users.filter(user => {
+      console.log (user);
+      return user.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+  });
+  //console.log(userFilter);
+  return userFilter; */
+
 };
 
 window.processCohortData = (options) => {
 };
+
+
+
