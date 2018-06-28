@@ -38,9 +38,8 @@ const addUserProgress = () => {
     const progress = JSON.parse(event.target.responseText);
 
     const usersWithStats = computeUsersStats(users, progress, courses);
-    const sortUsers =sortUsers(users, orderBy, orderDirection);
-    const filterUsers= filterUsers(users, search);
-    const  processCohortData =processCohortData(options);
+    //const sortUser =sortUsers(users, orderBy, orderDirection);
+    //const  procesCohortData =processCohortData(options);
     //Evento para mostrar una vez seleccionado el Cohorts 
     selectbtn.addEventListener('change', e => {
       e.preventDefault();
