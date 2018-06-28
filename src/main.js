@@ -37,7 +37,8 @@ const addUserProgress = () => {
   const progress = () => {
     const progress = JSON.parse(event.target.responseText);
 
-    const usersWithStats = computeUsersStats(users, progress, courses);
+    const usersWithStats = window.computeUsersStats(users, progress, courses);
+   
     //const sortUser =sortUsers(users, orderBy, orderDirection);
     //const  procesCohortData =processCohortData(options);
     //Evento para mostrar una vez seleccionado el Cohorts 
@@ -45,6 +46,7 @@ const addUserProgress = () => {
       e.preventDefault();
       if (selectbtn.value === 'lim-2018-03-pre-core-pw') {
         //FUNCION DE LISTA DE USUARIO
+        console.log (usersWithStats);
         const ListarUsuarios = () => {
           usersWithStats.map((usuario) => {
             let listUser = document.createElement('li');
@@ -71,8 +73,7 @@ const addUserProgress = () => {
     //Evento para buscar usuario
     //EVENTO PARA BUSCAR 
     buscarUser.addEventListener('keypress', (event) => {
-      debugger
-      const enter = event.which || event.keyCode;
+      let enter = event.which || event.keyCode;
       if (enter === 13) {
         let valorBusqueda = buscarUser.value;
         let mostrarloquesebusco = window.filterUsers(usersWithStats,valorBusqueda);
