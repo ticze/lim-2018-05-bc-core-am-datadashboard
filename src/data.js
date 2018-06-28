@@ -204,7 +204,7 @@ window.computeUsersStats = (users, progress, courses) => {
       }
 
   })
-  console.log(lista);
+ // console.log(lista);
   return lista;
 }
 
@@ -213,8 +213,8 @@ window.sortUsers = (users, orderBy, orderDirection) => {
 };
 
 window.filterUsers = (users, search) => {
-  let buscarUsser = users.filter((listaUser)=>listaUser.name.includes(search))
-  return buscarUsser;
+  let buscarUser = users.filter(listaUser=>listaUser.name.includes(search))
+  return buscarUser;
 
 }
 
