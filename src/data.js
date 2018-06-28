@@ -176,8 +176,8 @@ window.computeUsersStats = (users, progress, courses) => {
 
       }
 
-
       try {
+
           usersWithStats.stats = {
               percent: progress[usersWithStats.id].intro.percent,
               exercises: {
@@ -204,7 +204,7 @@ window.computeUsersStats = (users, progress, courses) => {
       }
 
   })
-  console.log(lista);
+ // console.log(lista);
   return lista;
 }
 
@@ -213,13 +213,15 @@ window.sortUsers = (users, orderBy, orderDirection) => {
 };
 
 window.filterUsers = (users, search) => {
-  let buscarUsser = users.filter((listaUser)=>listaUser.name.includes(search))
-  return buscarUsser;
+  let buscarUser = users.filter(listaUser=>Object.keys(listaUser.name).includes(search))
+ // console.log (buscarUser);
+  return buscarUser;
 
 }
 
 window.processCohortData = (options) => {
 
 };
+
 
 

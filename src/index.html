@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" href="../img/Laboratoria_CMYK_logo-11.png" type="image/x-icon">
-  <link rel="stylesheet" href="style.css" /> 
+  <link rel="stylesheet" href="style.css" />
   <title>Data Dashboard</title>
 </head>
+
 <body>
   <header>
     <figure>
       <img src="../img/Laboratoria_CMYK_logo-03.png">
     </figure>
-  </header>  
+  </header>
   <section>
     <nav class="vertical-menu">
       <ul>
@@ -32,24 +34,31 @@
       <div id="sedes">
         <select id="select-cohorts"></select>
         <p>Buscar</p>
-        <input type="search" id ='busca-users'>
+        <input type="text" id='busca-users'>
+        <select id ="select-orderBy">
+          <option>Nombre</option>
+          <option>Porcentaje de completitud total</option>
+          <option>Porcentaje de ejercicios completados</option>
+          <option>Porcentaje de quizzes completados</option>
+          <option>Porcentaje de ejercicios completados</option>
+          <option>Porcentaje de quizzes completados</option>
+          <option>Promedio de quizzes completados</option>
+          <option>Porcentaje de read completados</option>
+        </select>
+        <select id ="select-orderBy-form">
+            <option>DES</option>
+            <option>ASC</option>
+          </select>
       </div>
-      <div class="list-user">
-        <p class="user-name">Nombre del Usuario: </p>
-        <p class="user-exercices-completed">Ejercicios que realizo : </p>
-        <p class="user-exercices-percent"></p>
-        <p class="user-quizzes-completed"></p>
-        <p class="user-quizzes-percent"></p>
-        <p class="user-read-completed"></p>
-        <p class="user-read-percent"></p>
+      <div class="vertical-menu1">
+        <ul id="container-user">
+        </ul>
       </div>
-      
-      <div>
-        <ul id="container-user"></ul>
-      </div>
+
     </article>
   </section>
   <script src="main.js"></script>
   <script src="data.js"></script>
 </body>
+
 </html>
