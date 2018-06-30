@@ -178,9 +178,68 @@ const computerUserQuizz = (progress, courses) => {
 
 
 }
+window.sortUsers = (users, orderBy/*string*/, orderDirection/*string*/) => {  
+    //esta funcion ordena por orden alfabetico a las alumnas
+    if (orderBy === "Name") { //name es el campo por el que quiere ordenarlo
+      //sort es una funcion que ordena los arreglos, recibe una funcion que compara un elemento con otro
+      return users.sort(function (a, b) {
+        if (orderDirection == "ASC") {
+          //localCompare compara 2 strings que en este caso son los nombres de las alumnas
+          return a.name.localeCompare(b.name);
+        } else {
+          //esto mostrara el ordenamiento en orden descendente
+          return a.name.localeCompare(b.name) * -1;
+        }
+      });
+    }  
+    if(orderBy === "Percent"){
+      return users.sort((a,b)=>{
+        if(orderDirection == "ASC"){
+          return a.stats.percent - b.stats.percent;
+        }else{
+          return (a.stats.percent - b.stats.percent)*-1;
+        }
+      });
+    }
 
-window.sortUsers = (users, orderBy, orderDirection) => {
-}
+    if(orderBy === "ExcercisePercent"){
+        return users.sort((a,b)=>{
+          if(orderDirection == "ASC"){
+            return a.stats.exercises.percent - b.stats.exercises.percent;
+          }else{
+            return (a.stats.exercises.percent - b.stats.exercises.percent)*-1;
+          }
+        });
+      }
+      if(orderBy === "QuizzesPercent"){
+        return users.sort((a,b)=>{
+          if(orderDirection == "ASC"){
+            return a.stats.quizzes.percent - b.stats.quizzes.percent;
+          }else{
+            return (a.stats.quizzes.percent - b.stats.quizzes.percent)*-1;
+          }
+        });
+      }
+      
+      if(orderBy === "QuizzesScoreAvg"){
+        return users.sort((a,b)=>{
+          if(orderDirection == "ASC"){
+            return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg;
+          }else{
+            return (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg)*-1;
+          }
+        });
+      }
+      if(orderBy === "ReadsPercent"){
+        return users.sort((a,b)=>{
+          if(orderDirection == "ASC"){
+            return a.stats.reads.percent - b.stats.reads.percent;
+          }else{
+            return (a.stats.reads.percent - b.stats.reads.percent)*-1;
+          }
+        });
+      }
+  };
 window.filterUsers = (users, search) => {
     if(search){
         if(users){

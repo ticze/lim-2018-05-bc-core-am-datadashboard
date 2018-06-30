@@ -5,6 +5,8 @@ const btnUser = document.getElementById('btnMostrarUser');
 const selectbtn = document.getElementById('select-cohorts');
 const listUsers = document.getElementById('container-user');
 const inputFilterUser = document.getElementById('searchBox');
+const orderBybtn = document.getElementById('toggleSort');
+const selectOrderBy = document.getElementById('orderBy');
 
 const getJSON = (url, callback) => {
     const request = new XMLHttpRequest();
@@ -31,7 +33,7 @@ const addUserProgress = () => {
     getJSON(urlCohorts, addCohorts);
     const progress = () => {
         const progress = JSON.parse(event.target.responseText);
-       let  usersStats = computeUsersStats(users, progress, courses);
+        let usersStats = computeUsersStats(users, progress, courses);
     }
     getJSON(urlProgress, progress);
     getJSON(urlCohorts, courses);
@@ -39,38 +41,51 @@ const addUserProgress = () => {
 getJSON(urlUser, addUserProgress);
 const ListarUsuarios = (usuario) => {
     usuario.map((valorusuario) => {
-      let listUser = document.createElement('li');            
+        let listUser = document.createElement('li');
         listUser.innerHTML = valorusuario.name + '<br>' +
-          'Percent : ' + valorusuario.stats.percent + '%'  + '<br>' +
-          'Total de Ejercicios : '+ valorusuario.stats.exercises.total + '<br>' +
-          'Total de Ejercicios de completo: ' + valorusuario.stats.exercises.completed + '<br>' + 
-          'Porcentaje de Exercises  : ' + valorusuario.stats.exercises.percent + '%' + '<br>' +
-          'Total de Lecturas : '+ valorusuario.stats.reads.total + '<br>' +
-          'Total de Lecturas que completo: ' + valorusuario.stats.reads.completed + '<br>' + 
-          'Porcentaje de Lecturas  : ' + valorusuario.stats.reads.percent + '%' + '<br>' +
-          'Total de Quizzes : '+ valorusuario.stats.quizzes.total + '<br>' +
-          'Total de Quizzes que completo: ' + valorusuario.stats.quizzes.completed + '<br>' + 
-          'Porcentaje de Quizzes  : ' + valorusuario.stats.quizzes.percent + '%' + '<br>';          
-        listUsers.appendChild(listUser);            
+            'Percent : ' + valorusuario.stats.percent + '%' + '<br>' +
+            'Total de Ejercicios : ' + valorusuario.stats.exercises.total + '<br>' +
+            'Total de Ejercicios de completo: ' + valorusuario.stats.exercises.completed + '<br>' +
+            'Porcentaje de Exercises  : ' + valorusuario.stats.exercises.percent + '%' + '<br>' +
+            'Total de Lecturas : ' + valorusuario.stats.reads.total + '<br>' +
+            'Total de Lecturas que completo: ' + valorusuario.stats.reads.completed + '<br>' +
+            'Porcentaje de Lecturas  : ' + valorusuario.stats.reads.percent + '%' + '<br>' +
+            'Total de Quizzes : ' + valorusuario.stats.quizzes.total + '<br>' +
+            'Total de Quizzes que completo: ' + valorusuario.stats.quizzes.completed + '<br>' +
+            'Porcentaje de Quizzes  : ' + valorusuario.stats.quizzes.percent + '%' + '<br>';
+        listUsers.appendChild(listUser);
     });
-  }
+}
 //Evento para listar Usuarios
 selectbtn.addEventListener('change', e => {
     e.preventDefault();
     if (selectbtn.value === 'lim-2018-03-pre-core-pw') {
-       ListarUsuarios(listUsuarioComputerUser)      
+        ListarUsuarios(listUsuarioComputerUser)
     }
     else {
         alert('No se encuentran los datos de este cohorts');
     }
 });
+inputFilterUser.addEventListener('keyup', (event) => {
+    let search = searchBox.value; // Texto
+    let mostrarloquesebusca = window.filterUsers(listUsuarioComputerUser, search);
+    listUsers.innerHTML = " ";
+    ListarUsuarios(mostrarloquesebusca);
+    //searchBox.value = '';
+});
+
+orderBybtn.addEventListener('click', (event) => {
+    const orderDirection = toggleSort.innerText;
+    if (orderDirection == "ASC") {
+        toggleSort.innerText = "DESC";
+    } else {
+        toggleSort.innerText = "ASC";
+    }
+  
+        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'name', orderDirection);
+        listUsers.innerHTML = " ";
+        ListarUsuarios(sortedUsers);
+    
 
 
-inputFilterUser.addEventListener('keyup', (event) => {    
-      let search = searchBox.value; // Texto
-      let mostrarloquesebusca = window.filterUsers(listUsuarioComputerUser,search );
-      listUsers.innerHTML = " ";
-      ListarUsuarios(mostrarloquesebusca);
-      //searchBox.value = '';
-  });
-
+}); 
