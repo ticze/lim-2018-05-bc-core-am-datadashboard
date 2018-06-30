@@ -42,13 +42,13 @@ const addUserProgress = () => {
     const progress = JSON.parse(event.target.responseText);
 
     const usersWithStats = computeUsersStats(users, progress, courses);
-     //console.log(usersWithStats)
+    //console.log(usersWithStats)
     //console.log(sortUsers(usersWithStats, 'name', 'ASC')) 
     //console.log(sortUsers(usersWithStats, 'name', 'DESC')) 
     //console.log(sortUsers(usersWithStats, 'percent', 'ASC'))
     //console.log(sortUsers(usersWithStats, 'percent', 'DESC')) 
-    console.log(sortUsers(usersWithStats, 'excercises-percent', 'ASC')) 
-    sortUsers(usersWithStats, 'excercises-percent', 'DESC')
+    //console.log(sortUsers(usersWithStats, 'excercises-percent', 'ASC')) 
+    //console.log(sortUsers(usersWithStats, 'excercises-percent', 'DESC')) 
     sortUsers(usersWithStats, 'quizzes-percent', 'ASC')
     sortUsers(usersWithStats, 'quizzes-percent', 'DESC')
     sortUsers(usersWithStats, 'quizzes-scoreAvg', 'ASC')
