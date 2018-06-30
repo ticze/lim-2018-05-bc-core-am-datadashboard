@@ -153,14 +153,14 @@ Para ello hicimos huso de la herramienta **FIGMA** : Se trata de una conocida ap
 #### 1.3) Diseño de la Interfaz de Usuario (prototipo de alta fidelidad)
 
  [Figma](https://www.figma.com/file/Xfx8PbNcuM1Su99kQtcTSwOB/DATADASHBORA)
- 
- ![datadashboard_prototipo_alta](..\img\data 1.png)
 
- ![datadashboard_prototipo_alta](..\img\data 2.png)
+ ![datadashboard_prototipo_alta](img\data 1.png)
 
- ![datadashboard_prototipo_alta](..\img\data 3.png)
+ ![datadashboard_prototipo_alta](img\data 2.png)
 
- ![datadashboard_prototipo_alta](..\img\data 4.png)
+ ![datadashboard_prototipo_alta](img\data 3.png)
+
+ ![datadashboard_prototipo_alta](img\data 4.png)
 
 
 ### COLABORADORXS :
