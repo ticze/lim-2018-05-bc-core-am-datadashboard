@@ -1,227 +1,198 @@
+let listUsuarioComputerUser = [];
+
 window.computeUsersStats = (users, progress, courses) => {
-  let lista = users.map(usersWithStats => {
 
-      const exercisesTotal = (progress, courses) => {
-          let cont = 0;
-          courses.map((curso) => {
-              const valorUnits = Object.keys(progress[curso].units);
-              //console.log(valorUnits)
-              valorUnits.map((nombreUnits) => {
-                  //console.log (nombreUnits);
-                  const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                  // console.log(valorParts)
-                  valorParts.map((nombreParts) => {
-                      const valorExcercises = progress[curso].units[nombreUnits].parts[nombreParts];
-                      //console.log (valorExcercises)
-                      if (valorExcercises.hasOwnProperty('exercises')) {
-                          const nombreExercises = valorExcercises.exercises;
-                          cont += Object.keys(nombreExercises).length;
-                      }
-                  });
-              });
-          });
-          return cont
-      };
+    users.map(usuario => {
+        const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[usuario.id], courses);
+        listUsuarioComputerUser.push(UsuarioNuevo);
+    });
+    //ListarUsuarios(listUsuarioComputerUser);
+    return listUsuarioComputerUser;
 
-      const exercisesCompleted = (progress, courses) => {
-          let cont = 0;
-          courses.map((curso) => {
-              const valorUnits = Object.keys(progress[curso].units);
-              //console.log(valorUnits)
-              valorUnits.map((nombreUnits) => {
-                  //console.log (nombreUnits);
-                  const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                  //console.log(valorParts)
-                  valorParts.map((nombreParts) => {
-                      const valorExcercises = progress[curso].units[nombreUnits].parts[nombreParts];
-                      //console.log (valorExcercises)
-                      if (valorExcercises.hasOwnProperty('exercises')) {
-                          //const nombreExercises = valorExcercises.exercises
-                          const valorCompletado = Object.keys(valorExcercises.exercises);
-                          //console.log(valorCompletado) 
-                          valorCompletado.map((nombreExercises) => {
-                              //console.log (nombreExercises)
-                              const valorCompleted = progress[curso].units[nombreUnits].parts[nombreParts].exercises[nombreExercises].completed;
-                              //console.log (valorCompleted)
-                              if (valorCompleted == 1) {
-                                  cont += valorCompleted;
-                              }
-                          });
-                      }
-                  });
-              });
-          });
-
-          //console.log (cont)
-          return cont
-      }
-
-      const readTotal = (progress, courses) => {
-          let cont = 0;
-          courses.map((curso) => {
-              const valorUnits = Object.keys(progress[curso].units);
-              //console.log(valorUnits)
-              valorUnits.map((nombreUnits) => {
-                  //console.log (nombreUnits);
-                  const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                  //console.log(valorParts)
-                  valorParts.map((nombreParts) => {
-                      //console.log (nombreParts)
-                      const valorType = progress[curso].units[nombreUnits].parts[nombreParts].type;
-                      //console.log(valorType);
-                      if (valorType == "read") {
-                          cont++;
-                      }
-                  });
-              });
-          });
-
-          // console.log(cont)
-          return cont
-      }
-      const readCompleted = (progress, courses) => {
-          let cont = 0;
-          courses.map((curso) => {
-              const valorUnits = Object.keys(progress[curso].units);
-              //console.log(valorUnits)
-              valorUnits.map((nombreUnits) => {
-                  //console.log (nombreUnits);
-                  const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                  //console.log(valorParts)
-                  valorParts.map((nombreParts) => {
-                      //console.log (nombreParts)
-                      const valorTypeComplet = progress[curso].units[nombreUnits].parts[nombreParts].completed;
-                      const valorType = progress[curso].units[nombreUnits].parts[nombreParts].type;
-                      //console.log(valorType);
-                      if (valorType == "read" && valorTypeComplet == 1) {
-                          cont++;
-                      }
-                  });
-              });
-          });
-
-          // console.log(cont)
-          return cont
+}
+const NuevoUsuarioStats = (usuario, progress, courses) => {
+    let nameUser = usuario.name;
+    let usersWithStats = {}
+    usersWithStats.stats = {
+        percent: computerUserPercent(progress, courses),
+        exercises: computerExercises(progress, courses),
+        reads: computerUsersRead(progress, courses),
+        quizzes: computerUserQuizz(progress, courses),
+    }
+    usersWithStats.name = nameUser;
+    return usersWithStats;
+}
+const computerUserPercent = (progress, courses) => {
+    try {
+        return progress[courses].percent;
+    } catch (error) {
+        return 0;
+    }
+}
+const computerExercises = (progress, courses) => {
+    let cont = 0;
+    let contComplet = 0;
+    try {
+        courses.map((curso) => {
+            const valorUnits = Object.keys(progress[curso].units);
+            //console.log(valorUnits)
+            valorUnits.map((nombreUnits) => {
+                //console.log (nombreUnits);
+                const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
+                // console.log(valorParts)
+                valorParts.map((nombreParts) => {
+                    const valorExcercises = progress[curso].units[nombreUnits].parts[nombreParts];
+                    //console.log (valorExcercises)
+                    if (valorExcercises.hasOwnProperty('exercises')) {
+                        const nombreExercises = valorExcercises.exercises;
+                        cont += Object.keys(nombreExercises).length;
+                        //const nombreExercises = valorExcercises.exercises
+                        const valorCompletado = Object.keys(valorExcercises.exercises);
+                        //console.log(valorCompletado) 
+                        valorCompletado.map((nombreExercises) => {
+                            //console.log (nombreExercises)
+                            const valorCompleted = progress[curso].units[nombreUnits].parts[nombreParts].exercises[nombreExercises].completed;
+                            //console.log (valorCompleted)
+                            if (valorCompleted == 1) {
+                                contComplet += valorCompleted;
+                            }
+                        });
+                    }
+                });
 
 
-      }
+            });
+        });
+    } catch (error) {
+        let exercises = {
+            total: 0,
+            completed: 0,
+            percent: 0,
+        }
 
-      const quizTotal = (progress, courses) => {
-          let cont = 0;
-          courses.map((curso) => {
-              const valorUnits = Object.keys(progress[curso].units);
-              //console.log(valorUnits)
-              valorUnits.map((nombreUnits) => {
-                  //console.log (nombreUnits);
-                  const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                  //console.log(valorParts)
-                  valorParts.map((nombreParts) => {
-                      //console.log (nombreParts)
-                      const valorType = progress[curso].units[nombreUnits].parts[nombreParts].type;
-                      //console.log(valorType);
-                      if (valorType == "quiz") {
-                          cont++;
-                      }
-                  });
-              });
-          });
+        return exercises;
 
-          // console.log(cont)
-          return cont
-      }
-      const quizCompleted = (progress, courses) => {
-          let cont = 0;
-          courses.map((curso) => {
-              const valorUnits = Object.keys(progress[curso].units);
-              //console.log(valorUnits)
-              valorUnits.map((nombreUnits) => {
-                  //console.log (nombreUnits);
-                  const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                  //console.log(valorParts)
-                  valorParts.map((nombreParts) => {
-                      //console.log (nombreParts)
-                      const valorType = progress[curso].units[nombreUnits].parts[nombreParts];
-                      //console.log(valorType);
-                      if (valorType.type == "quiz" && valorType.completed == 1) {
-                          cont++;
-                      }
-                  });
-              });
-          });
-          // console.log(cont)
-          return cont
-      }
+    }
 
-      const quizScoreSum = (progress, courses) => {
-          let cont = 0;
-          courses.map((curso) => {
-              const valorUnits = Object.keys(progress[curso].units);
-              //console.log(valorUnits)
-              valorUnits.map((nombreUnits) => {
-                  //console.log (nombreUnits);
-                  const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                  //console.log(valorParts)
-                  valorParts.map((nombreParts) => {
-                      //console.log (nombreParts)
-                      const valorType = progress[curso].units[nombreUnits].parts[nombreParts];
-                      //console.log(valorType);
-                      if (valorType.type == "quiz" && valorType.completed == 1 && valorType.score) {
-                          cont += valorType.score;
-                      }
-                  });
-              });
-          });
-          // console.log(typeof(cont),cont)
-          return cont
+    let exercises = {
+        total: cont,
+        completed: contComplet,
+        percent: (contComplet / cont) * 100,
+    }
+    return exercises;
 
-      }
 
-      try {
+};
+const computerUsersRead = (progress, courses) => {
+    let cont = 0;
+    let contComplet = 0;
+    try {
+        courses.map((curso) => {
+            const valorUnits = Object.keys(progress[curso].units);
+            //console.log(valorUnits)
+            valorUnits.map((nombreUnits) => {
+                //console.log (nombreUnits);
+                const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
+                //console.log(valorParts)
+                valorParts.map((nombreParts) => {
+                    //console.log (nombreParts)
+                    const valorType = progress[curso].units[nombreUnits].parts[nombreParts];
+                    //console.log(valorType);
+                    if (valorType.type == "read") {
+                        cont++;
+                    }
+                    if (valorType.type == "read" && valorType.completed == 1) {
+                        contComplet++;
+                    }
+                });
+            });
+        });
 
-          usersWithStats.stats = {
-              percent: progress[usersWithStats.id].intro.percent,
-              exercises: {
-                  total: exercisesTotal(progress[usersWithStats.id], courses),
-                  completed: exercisesCompleted(progress[usersWithStats.id], courses),
-                  percent: (exercisesCompleted(progress[usersWithStats.id], courses) / exercisesTotal(progress[usersWithStats.id], courses)) * 100,
-              },
-              reads: {
-                  total: readTotal(progress[usersWithStats.id], courses),
-                  completed: readCompleted(progress[usersWithStats.id], courses),
-                  percent: Math.round((readCompleted(progress[usersWithStats.id], courses) / readTotal(progress[usersWithStats.id], courses)) * 100)
-              },
-              quizzes: {
-                  total: quizTotal(progress[usersWithStats.id], courses),
-                  completed: quizCompleted(progress[usersWithStats.id], courses),
-                  percent: Math.round((quizCompleted(progress[usersWithStats.id], courses) / quizTotal(progress[usersWithStats.id], courses)) * 100),
-                  scoreSum: quizScoreSum(progress[usersWithStats.id], courses),
-                  scoreAvg: Math.round(quizScoreSum(progress[usersWithStats.id], courses) / quizCompleted(progress[usersWithStats.id], courses)),
-              }
-          }
-          return usersWithStats;
-      } catch (error) {
-          return {};
-      }
+    } catch (error) {
+        let reads = {
+            total: 0,
+            completed: 0,
+            percent: 0,
+        }
+        return reads;
+    }
 
-  })
- // console.log(lista);
-  return lista;
+    let reads = {
+        total: cont,
+        completed: contComplet,
+        percent: Math.round((contComplet / cont) * 100),
+    }
+    return reads;
+
+
+}
+const computerUserQuizz = (progress, courses) => {
+    let cont = 0;
+    let contComplet = 0;
+    let contscoreAvg = 0
+    try {
+        courses.map((curso) => {
+            const valorUnits = Object.keys(progress[curso].units);
+            //console.log(valorUnits)
+            valorUnits.map((nombreUnits) => {
+                //console.log (nombreUnits);
+                const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
+                //console.log(valorParts)
+                valorParts.map((nombreParts) => {
+                    //console.log (nombreParts)
+                    const valorType = progress[curso].units[nombreUnits].parts[nombreParts];
+                    //console.log(valorType);
+                    if (valorType.type == "quiz") {
+                        cont++;
+                    }
+                    if (valorType.type == "quiz" && valorType.completed == 1) {
+                        contComplet++;
+                    }
+
+                    if (valorType.type == "quiz" && valorType.completed == 1 && valorType.score) {
+                        contscoreAvg += valorType.score;
+                    }
+                });
+            });
+        });
+
+    } catch (error) {
+        let quizzes = {
+            total: 0,
+            completed: 0,
+            percent: 0,
+            scoreSum: 0,
+            scoreAvg: 0,
+        }
+        return quizzes;
+    }
+
+    let quizzes = {
+        total: cont,
+        completed: contComplet,
+        percent: Math.round((contComplet / cont) * 100),
+        scoreSum: contscoreAvg,
+        scoreAvg: Math.round(contscoreAvg / contComplet),
+    }
+    return quizzes;
+
+
 }
 
-//Funcion para Ordenar
 window.sortUsers = (users, orderBy, orderDirection) => {
-};
-
+}
 window.filterUsers = (users, search) => {
-  let buscarUser = users.filter(listaUser=>Object.keys(listaUser.name).includes(search))
- // console.log (buscarUser);
-  return buscarUser;
-
+    if(search){
+        if(users){
+          search =search.toLowerCase();
+          return  users.filter(user => user &&
+             user.name &&
+            user.name.toLowerCase().indexOf(search)>= 0);
+        }
+      }
+      return users;   
 }
 
 window.processCohortData = (options) => {
-
-};
-
-
-
+    
+}

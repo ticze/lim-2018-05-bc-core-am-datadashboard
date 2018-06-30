@@ -34,21 +34,19 @@
       <div id="sedes">
         <select id="select-cohorts"></select>
         <p>Buscar</p>
-        <input type="text" id='busca-users'>
-        <select id ="select-orderBy">
-          <option>Nombre</option>
-          <option>Porcentaje de completitud total</option>
-          <option>Porcentaje de ejercicios completados</option>
-          <option>Porcentaje de quizzes completados</option>
-          <option>Porcentaje de ejercicios completados</option>
-          <option>Porcentaje de quizzes completados</option>
-          <option>Promedio de quizzes completados</option>
-          <option>Porcentaje de read completados</option>
-        </select>
-        <select id ="select-orderBy-form">
-            <option>DES</option>
-            <option>ASC</option>
+        <input id="searchBox" type="text">        
+        <div>
+          <select name="" id="orderBy">
+            <option value="name">Name</option>
+            <option value="percent">Percent</option>
+            <option value="excercises-percent">ExcercisePercent</option>
+            <option value="quizzes-percent">QuizzesPercent</option>
+            <option value="quizzes-scoreAvg">QuizzesScoreAvg</option>
+            <option value="reads-percent">ReadsPercent</option>
           </select>
+          <input type="checkbox" value="asc">Asc
+          <input type="checkbox" value="desc">Desc
+        </div>
       </div>
       <div class="vertical-menu1">
         <ul id="container-user">
@@ -60,5 +58,4 @@
   <script src="main.js"></script>
   <script src="data.js"></script>
 </body>
-
 </html>
