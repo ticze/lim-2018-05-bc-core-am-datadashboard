@@ -28,6 +28,13 @@ describe('data', () => {
       assert.equal(users.length, processed.length);
 
       processed.forEach(user => {
+        assert.ok(user.hasOwnProperty('id'));
+        assert.ok(user.hasOwnProperty('name'));
+        assert.ok(user.hasOwnProperty('github'));
+        assert.ok(user.hasOwnProperty('locale'));
+        assert.ok(user.hasOwnProperty('signupCohort'));
+        assert.ok(user.hasOwnProperty('timezone'));
+        assert.ok(user.hasOwnProperty('role'));
         assert.ok(user.hasOwnProperty('stats'));
         assert.isNumber(user.stats.percent);
         assert.isObject(user.stats.exercises);

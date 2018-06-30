@@ -1,5 +1,6 @@
 window.computeUsersStats = (users, progress, courses) => {
   let lista = users.map(usersWithStats => {
+
     const exercisesTotal = (progress, courses) => {
       let cont = 0;
       courses.map((curso) => {
@@ -175,8 +176,8 @@ window.computeUsersStats = (users, progress, courses) => {
 
     }
 
-
     try {
+
       usersWithStats.stats = {
         percent: progress[usersWithStats.id].intro.percent,
         exercises: {
@@ -199,7 +200,15 @@ window.computeUsersStats = (users, progress, courses) => {
       }
       return usersWithStats;
     } catch (error) {
-      return {};
+      return usersWithStats.stats = {
+        id: usersWithStats.id,
+        ignupCohort: usersWithStats.ignupCohort,
+        timezone: usersWithStats.timezone,
+        name: usersWithStats.name,
+        locale: usersWithStats.locale,
+        role: usersWithStats.role
+      };
+
     }
 
   })
@@ -207,30 +216,108 @@ window.computeUsersStats = (users, progress, courses) => {
   return lista;
 };
 
-window.sortUsers = (users, orderBy) => {
-  //console.log(users,text)
-  const sortName = users.sort((a, b) => {
-    if (a.name > b.name) {
+//Funcion para Ordenar
+window.sortUsers = (users, orderBy, orderDirection) => {
+  //console.log(users)
+  const sortByName = (a, b) => {
+    const obj1 = a.name.toUpperCase();
+    const obj2 = b.name.toUpperCase();
+    if (obj1 > obj2) {
       return 1;
     }
-    if (a.name < b.name) {
+    if (obj1 < obj2) {
       return -1;
     }
     return 0;
-  })
-  console.log(sortName)
+  }
 
-  const sortPercent = users.map(() => {
-    
-  })
-  
+  const sortByPercent = (a, b) => {
+    if (a.stats.percent > b.stats.percent) {
+      return 1;
+    }
+    if (a.stats.percent < b.stats.percent) {
+      return -1;
+    }
+    return 0;
+  }
+
+  const sortByExcercisePercent = (a, b) => {
+    if (a.stats.excersices.percent > b.stats.excencises.percent) {
+      return 1;
+    }
+    if (a.stats.excersices.percent > b.stats.excencises.percent) {
+      return -1;
+    }
+    return 0;
+  }
+
+  const sortByQuizzesPercent = (a, b) => {
+    if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
+      return 1;
+    }
+    if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
+      return -1;
+    }
+    return 0;
+  }
+
+  const sortByQuizzesScoreAvg = (a, b) => {
+    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
+      return 1;
+    }
+    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
+      return -1;
+    }
+    return 0;
+  }
+
+  const sortByReadsPercent = (a, b) => {
+    if (a.stats.reads.percent > b.stats.reads.percent) {
+      return 1;
+    }
+    if (a.stats.reads.percent > b.stats.reads.percent) {
+      return -1;
+    }
+    return 0;
+  }
+
+  let sorted;
+  if (orderBy === 'name') {
+    sorted = users.sort(sortByName)
+  }  /* else if (orderBy === 'percent') {
+    sorted = users.sort(sortByPercent)
+  } else if (orderBy === 'excercises-percent') {
+    sorted = users.sort(sortByExcercisePercent)
+  } else if (orderBy === 'quizzes-percent') {
+    sorted = users.sort(sortByQuizzesPercent)
+  } else if (orderBy === 'quizzes-scoreAvg') {
+    sorted = users.sort(sortByQuizzesScoreAvg)
+  } else if (orderBy === 'reads-percent') {
+    sorted = users.sort(sortByReadsPercent)
+  }  */
+  //const retro = sorted.reverse()
+  return sorted
 };
 
 window.filterUsers = (users, search) => {
-  let buscarUsser = users.filter((listaUser) => listaUser.name.includes(search))
-  return buscarUsser;
+  //console.log('hola soy el array' + users);
+  //console.log('hola soy el texto del user' + search);
+
+  let buscarUser = users.filter(listaUser => listaUser.name.includes(search))
+  //console.log (buscarUser);
+  return buscarUser;
+
+  /* const userFilter = users.filter(user => {
+      console.log (user);
+      return user.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+  });
+  //console.log(userFilter);
+  return userFilter; */
 
 };
 
 window.processCohortData = (options) => {
 };
+
+
+
