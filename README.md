@@ -20,7 +20,9 @@ Se pudo realizar una entrevista directa al usuario en donde se determino los req
 * Por ello tomamos las sus respuestas ; en cuanto a lo que espera visualizar en el Proyecto , como primeros indicadores para prototipar el steck de baja fidelidad.
 
  ![PROTOTIPO](img/01-baja.jpg)
+
  ![PROTOTIPO](img/02-baja.jpg)
+
  ![PROTOTIPO](img/03-baja.jpg)
 
 
@@ -50,10 +52,12 @@ Para ello hicimos huso de la herramienta **FIGMA** : Se trata de una conocida ap
 
 #### 3) Definimos los Milesstons.
 ![PROTOTIPO](img/07-milesston.PNG)
+
 ![PROTOTIPO](img/10-milesston.PNG)
 
 #### 4) Definimos los Issues.
 ![PROTOTIPO](img/08-issues.PNG)
+
 ![PROTOTIPO](img/09-issues.PNG)
 
 
