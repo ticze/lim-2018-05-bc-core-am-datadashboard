@@ -1,3 +1,5 @@
+let listUsuarioComputerUser = [];
+
 window.computeUsersStats = (users, progress, courses) => {
   let lista = users.map(usersWithStats => {
 
@@ -298,6 +300,46 @@ window.sortUsers = (users, orderBy, orderDirection) => {
   //const retro = sorted.reverse()
   return sorted
 };
+const computerUsersRead = (progress, courses) => {
+    let cont = 0;
+    let contComplet = 0;
+    try {
+        courses.map((curso) => {
+            const valorUnits = Object.keys(progress[curso].units);
+            //console.log(valorUnits)
+            valorUnits.map((nombreUnits) => {
+                //console.log (nombreUnits);
+                const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
+                //console.log(valorParts)
+                valorParts.map((nombreParts) => {
+                    //console.log (nombreParts)
+                    const valorType = progress[curso].units[nombreUnits].parts[nombreParts];
+                    //console.log(valorType);
+                    if (valorType.type == "read") {
+                        cont++;
+                    }
+                    if (valorType.type == "read" && valorType.completed == 1) {
+                        contComplet++;
+                    }
+                });
+            });
+        });
+
+    } catch (error) {
+        let reads = {
+            total: 0,
+            completed: 0,
+            percent: 0,
+        }
+        return reads;
+    }
+
+    let reads = {
+        total: cont,
+        completed: contComplet,
+        percent: Math.round((contComplet / cont) * 100),
+    }
+    return reads;
 
 window.filterUsers = (users, search) => {
   //console.log('hola soy el array' + users);
@@ -316,6 +358,7 @@ window.filterUsers = (users, search) => {
 
 };
 
+}
 window.processCohortData = (options) => {
 };
 

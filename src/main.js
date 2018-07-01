@@ -10,18 +10,15 @@ const selectByOrder = document.getElementById('orderBy');
 
 
 const getJSON = (url, callback) => {
-  const request = new XMLHttpRequest();
-  request.open('GET', url);
-  request.onload = callback;
-  request.onerror = handleError;
-  request.send();
+    const request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = callback;
+    request.onerror = handleError;
+    request.send();
 }
-
 const handleError = () => {
   alert('Se ha presentado un error');
 }
-
-
 const addUserProgress = () => {
   const courses = ["intro"]
   const users = JSON.parse(event.target.responseText);
