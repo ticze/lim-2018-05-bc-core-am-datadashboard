@@ -177,6 +177,7 @@ const computerUserQuizz = (progress, courses) => {
     }
     return quizzes;
 }
+
 window.sortUsers = (users, orderBy, orderDirection) => {
     //esta funcion ordena por orden alfabetico a las alumnas
     if (orderBy == "Name") {
@@ -248,6 +249,5 @@ window.filterUsers = (users, search) => {
 }
 
 window.processCohortData = (options) => {
-
 
 }
