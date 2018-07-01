@@ -73,19 +73,48 @@ inputFilterUser.addEventListener('keyup', (event) => {
     ListarUsuarios(mostrarloquesebusca);
     //searchBox.value = '';
 });
-
+//Evento para poder Ordenar 
 orderBybtn.addEventListener('click', (event) => {
-    const orderDirection = toggleSort.innerText;
-    if (orderDirection == "ASC") {
+    const direction = toggleSort.innerText;
+    if (direction == "ASC") {
         toggleSort.innerText = "DESC";
     } else {
         toggleSort.innerText = "ASC";
     }
-  
-        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'name', orderDirection);
+
+    if (selectOrderBy.value === "name") {
+        //llamamos a la funcion de ordenamiento para que que ordene los usuarios
+        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'Name', direction);
+        //no se hace el getElementById por que en JS todo lo declarado en el html con un id queda como variable global :O
         listUsers.innerHTML = " ";
         ListarUsuarios(sortedUsers);
-    
+    } else if (selectOrderBy.value === "percent") {
+        //llamamos a la funcion de ordenamiento 
+        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'Percent', direction);        
+        listUsers.innerHTML = " ";
+        ListarUsuarios(sortedUsers);
 
+    } else if (selectOrderBy.value === "excercises-percent") {
+        //llamamos a la funcion de ordenamiento 
+        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'ExcercisePercent', direction);        
+        listUsers.innerHTML = " ";
+        ListarUsuarios(sortedUsers);
+
+    } else if (selectOrderBy.value === "quizzes-percent") {
+        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'QuizzesPercent', direction);       
+        listUsers.innerHTML = " "; 
+        ListarUsuarios(sortedUsers); 
+
+    } else if (selectOrderBy.value === "quizzes-scoreAvg") {
+        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'QuizzesScoreAvg', direction);        
+        listUsers.innerHTML = " "; 
+        ListarUsuarios(sortedUsers);       
+    } else if (selectOrderBy.value === "reads-percent") {
+        const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'ReadsPercent', direction);
+        listUsers.innerHTML = " "; 
+        ListarUsuarios(sortedUsers);       
+    } else{
+        alert('Seleccionar el selector correcto');
+    }
 
 }); 
