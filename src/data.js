@@ -6,7 +6,6 @@ window.computeUsersStats = (users, progress, courses) => {
         const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[usuario.id], courses);
         listUsuarioComputerUser.push(UsuarioNuevo);
     });
-    //ListarUsuarios(listUsuarioComputerUser);
     return listUsuarioComputerUser;
 
 }
@@ -35,18 +34,18 @@ const computerExercises = (progress, courses) => {
     try {
         courses.map((curso) => {
             const valorUnits = Object.keys(progress[curso].units);
-            //console.log(valorUnits)
+            
             valorUnits.map((nombreUnits) => {
-                //console.log (nombreUnits);
+             
                 const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-                // console.log(valorParts)
+               
                 valorParts.map((nombreParts) => {
                     const valorExcercises = progress[curso].units[nombreUnits].parts[nombreParts];
-                    //console.log (valorExcercises)
+                   
                     if (valorExcercises.hasOwnProperty('exercises')) {
                         const nombreExercises = valorExcercises.exercises;
                         cont += Object.keys(nombreExercises).length;
-                        //const nombreExercises = valorExcercises.exercises
+                        
                         const valorCompletado = Object.keys(valorExcercises.exercises);
                         //console.log(valorCompletado) 
                         valorCompletado.map((nombreExercises) => {
@@ -248,5 +247,6 @@ window.filterUsers = (users, search) => {
 }
 
 window.processCohortData = (options) => {
+
 
 }

@@ -39,6 +39,7 @@ const addUserProgress = () => {
     getJSON(urlCohorts, courses);
 }
 getJSON(urlUser, addUserProgress);
+//Funcion para Listar Estudiantes en una lista
 const ListarUsuarios = (usuario) => {
     usuario.map((valorusuario) => {
         let listUser = document.createElement('li');
@@ -56,7 +57,7 @@ const ListarUsuarios = (usuario) => {
         listUsers.appendChild(listUser);
     });
 }
-//Evento para listar Usuarios
+//Evento para listar Usuarios cuando selecionamos el cohorts
 selectbtn.addEventListener('change', e => {
     e.preventDefault();
     if (selectbtn.value === 'lim-2018-03-pre-core-pw') {
@@ -66,6 +67,7 @@ selectbtn.addEventListener('change', e => {
         alert('No se encuentran los datos de este cohorts');
     }
 });
+//Evento para buscar Estudiante
 inputFilterUser.addEventListener('keyup', (event) => {
     let search = searchBox.value; // Texto
     let mostrarloquesebusca = window.filterUsers(listUsuarioComputerUser, search);
