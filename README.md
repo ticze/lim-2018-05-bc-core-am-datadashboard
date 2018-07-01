@@ -45,10 +45,10 @@ Para ello hicimos huso de la herramienta **FIGMA** : Se trata de una conocida ap
 ![PROTOTIPO](img/04-plane.jpg)
 
 #### 3) Definimos los Milesstons.
-![PROTOTIPO](img/07-milesston.png)
-![PROTOTIPO](img/10-milesston.png)
-![PROTOTIPO](img/08-issues.png)
-![PROTOTIPO](img/09-issues.png)
+![PROTOTIPO](img/07-milesston.PNG)
+![PROTOTIPO](img/10-milesston.PNG)
+![PROTOTIPO](img/08-issues.PNG)
+![PROTOTIPO](img/09-issues.PNG)
 
 ## COLABORADORXS :
 
