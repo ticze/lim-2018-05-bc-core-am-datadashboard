@@ -4,9 +4,9 @@ const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 const btnUser = document.getElementById('btnMostrarUser');
 const selectbtn = document.getElementById('select-cohorts');
 const listUsers = document.getElementById('container-user');
-const inputFilterUser = document.getElementById('searchBox');
-const orderBybtn = document.getElementById('toggleSort');
-const selectOrderBy = document.getElementById('orderBy');
+const inputFilterUser = document.getElementById('searchBox');//buscar imput
+const orderBybtn = document.getElementById('toggleSort'); //ASC O DESC
+const selectOrderBy = document.getElementById('orderBy');//SELECTOR 
 
 const getJSON = (url, callback) => {
     const request = new XMLHttpRequest();
@@ -39,6 +39,7 @@ const addUserProgress = () => {
     getJSON(urlCohorts, courses);
 }
 getJSON(urlUser, addUserProgress);
+
 //Funcion para Listar Estudiantes en una lista
 const ListarUsuarios = (usuario) => {
     usuario.map((valorusuario) => {
@@ -69,7 +70,8 @@ selectbtn.addEventListener('change', e => {
 });
 //Evento para buscar Estudiante
 inputFilterUser.addEventListener('keyup', (event) => {
-    let search = searchBox.value; // Texto
+    let search = event.target.value; // Texto
+   // let search= inputFilterUser.value;
     let mostrarloquesebusca = window.filterUsers(listUsuarioComputerUser, search);
     listUsers.innerHTML = " ";
     ListarUsuarios(mostrarloquesebusca);
@@ -83,7 +85,6 @@ orderBybtn.addEventListener('click', (event) => {
     } else {
         toggleSort.innerText = "ASC";
     }
-
     if (selectOrderBy.value === "name") {
         //llamamos a la funcion de ordenamiento para que que ordene los usuarios
         const sortedUsers = window.sortUsers(listUsuarioComputerUser, 'Name', direction);

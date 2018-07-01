@@ -6,9 +6,11 @@ window.computeUsersStats = (users, progress, courses) => {
         const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[usuario.id], courses);
         listUsuarioComputerUser.push(UsuarioNuevo);
     });
-    return listUsuarioComputerUser;
-
+    return listUsuarioComputerUser;    
 }
+
+//console.log(listUsuarioComputerUser) 
+
 const NuevoUsuarioStats = (usuario, progress, courses) => {
     let nameUser = usuario.name;
     let usersWithStats = {}
@@ -178,7 +180,7 @@ const computerUserQuizz = (progress, courses) => {
 window.sortUsers = (users, orderBy, orderDirection) => {
     //esta funcion ordena por orden alfabetico a las alumnas
     if (orderBy == "Name") {
-        return users.sort(function (a, b) {
+        return users.sort((a, b)=> {
             if (orderDirection == "ASC") {
                 //localCompare compara 2 strings que en este caso son los nombres de las alumnas
                 return a.name.localeCompare(b.name);
@@ -239,8 +241,7 @@ window.filterUsers = (users, search) => {
         if (users) {
             search = search.toLowerCase();
             return users.filter(user => user &&
-                user.name &&
-                user.name.toLowerCase().indexOf(search) >= 0);
+                user.name && user.name.toLowerCase().indexOf(search) >= 0);
         }
     }
     return users;
