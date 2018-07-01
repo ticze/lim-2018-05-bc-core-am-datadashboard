@@ -1,14 +1,12 @@
 let listUsuarioComputerUser = [];
 
 window.computeUsersStats = (users, progress, courses) => {
-
     users.map(usuario => {
         const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[usuario.id], courses);
         listUsuarioComputerUser.push(UsuarioNuevo);
     });
     return listUsuarioComputerUser;    
 }
-
 //console.log(listUsuarioComputerUser) 
 
 const NuevoUsuarioStats = (usuario, progress, courses) => {
@@ -251,3 +249,5 @@ window.filterUsers = (users, search) => {
 window.processCohortData = (options) => {
 
 }
+
+
