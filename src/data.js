@@ -1,5 +1,4 @@
 let listUsuarioComputerUser = [];
-
 window.computeUsersStats = (users, progress, courses) => {
 
   users.map(usuario => {
@@ -181,7 +180,9 @@ const computerUserQuizz = (progress, courses) => {
 
 //Funcion para Ordenar
 window.sortUsers = (users, orderBy, orderDirection) => {
-  //console.log(users)
+  
+ //console.log(users)
+/* 
   const sortByName = (a, b) => {
     const obj1 = a.name.toUpperCase()
     const obj2 = b.name.toUpperCase()
@@ -295,7 +296,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     }
     return 0;
   }
-  
+
   const sortByReadsPercent2 = (a, b) => {
     if (a.stats.reads.percent < b.stats.reads.percent) {
       return 1;
@@ -304,36 +305,67 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       return -1;
     }
     return 0;
-  }
+  } */
 
-  let sorted;
+  const arrName = users.map((user) => {
+    return user.name
+  })
+  //console.log(arrName)
+  debugger
+  const orderName = arrName.sort((a, b) => {
+    const obj1 = a.toUpperCase()
+    const obj2 = b.toUpperCase()
+    if (obj1 < obj2) {
+      return 1;
+    }
+    if (obj1 > obj2) {
+      return -1;
+    }
+    return 0;
+  })
+  console.log(orderName)
+
+  const reverseName = arrName.sort((a, b) => {
+    const obj1 = a.toUpperCase()
+    const obj2 = b.toUpperCase()
+    if (obj1 < obj2) {
+      return 1;
+    }
+    if (obj1 > obj2) {
+      return -1;
+    }
+    return 0;
+  })
+  
+
+  /* let sorted;
   if (orderBy === 'name' && orderDirection === 'ASC') {
-    sorted = users.sort(sortByName)
+    sorted = orderName
   } else if (orderBy === 'name' && orderDirection === 'DESC') {
-    sorted = users.sort(sortByName2)
-  } else if (orderBy === 'percent' && orderDirection === 'ASC') {
-    sorted = users.sort(sortByPercent)
+    sorted = reverseName
+  } */ /* else if (orderBy === 'percent' && orderDirection === 'ASC') {
+    sorted = arrUser.sort(sortByPercent)
   } else if (orderBy === 'percent' && orderDirection === 'DESC') {
-    sorted = users.sort(sortByPercent2)
+    sorted = arrUser.sort(sortByPercent2)
   } else if (orderBy === 'excercises-percent' && orderDirection === 'ASC') {
-    sorted = users.sort(sortByExcercisePercent)
+    sorted = arrUser.sort(sortByExcercisePercent)
   }  else if (orderBy === 'excercises-percent' && orderDirection === 'DESC') {
-    sorted = users.sort(sortByExcercisePercent2)
+    sorted = arrUser.sort(sortByExcercisePercent2)
   } else if (orderBy === 'quizzes-percent' && orderDirection === 'ASC') {
-    sorted = users.sort(sortByQuizzesPercent)
+    sorted = arrUser.sort(sortByQuizzesPercent)
   }  else if (orderBy === 'quizzes-percent' && orderDirection === 'DESC') {
-    sorted = users.sort(sortByQuizzesPercent2)
+    sorted = arrUser.sort(sortByQuizzesPercent2)
   } else if (orderBy === 'quizzes-scoreAvg' && orderDirection === 'ASC') {
-    sorted = users.sort(sortByQuizzesScoreAvg)
+    sorted = arrUser.sort(sortByQuizzesScoreAvg)
   }  else if (orderBy === 'quizzes-scoreAvg' && orderDirection === 'DESC') {
-    sorted = users.sort(sortByQuizzesScoreAvg2)
+    sorted = arrUser.sort(sortByQuizzesScoreAvg2)
   } else if (orderBy === 'reads-percent'&& orderDirection === 'ASC') {
     sorted = users.sort(sortByReadsPercent)
   } else if (orderBy === 'reads-percent'&& orderDirection === 'DESC') {
-    sorted = users.sort(sortByReadsPercent2)
-  }  
-  
-  return sorted
+    sorted = arrUser.sort(sortByReadsPercent2)
+  }   */
+
+  /* return sorted */
 
 };
 
