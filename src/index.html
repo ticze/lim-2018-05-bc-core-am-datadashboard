@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -15,44 +16,28 @@
       <img src="../img/Laboratoria_CMYK_logo-03.png">
     </figure>
   </header>
-  <section>
-    <nav class="vertical-menu">
-      <ul>
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Data</a>
-        </li>
-        <li>
-          <a href="#">Estudiantes</a>
-        </li>
+  <div id="contenedor">
+    <div id="sedes">
+      <select id="select-cohorts"></select>
+      <input id="searchBox" type="text" placeholder="Buscar">
+      <div>
+        <select name="" id="orderBy">
+          <option value="name">Name</option>
+          <option value="percent">Percent</option>
+          <option value="excercises-percent">ExcercisePercent</option>
+          <option value="quizzes-percent">QuizzesPercent</option>
+          <option value="quizzes-scoreAvg">QuizzesScoreAvg</option>
+          <option value="reads-percent">ReadsPercent</option>
+        </select>
+        <!--toggle es un tipo de boton que al clickarlo cambia-->
+        <button id="toggleSort">ASC</button>
+      </div>
+    </div>
+    <div class="vertical-menu1">
+      <ul id="container-user">
       </ul>
-    </nav>
-    <article>
-      <div id="sedes">
-        <select id="select-cohorts"></select>        
-        <input id="searchBox" type="text" placeholder="Buscar">
-        <div>
-          <select name="" id="orderBy">
-            <option value="name">Name</option>
-            <option value="percent">Percent</option>
-            <option value="excercises-percent">ExcercisePercent</option>
-            <option value="quizzes-percent">QuizzesPercent</option>
-            <option value="quizzes-scoreAvg">QuizzesScoreAvg</option>
-            <option value="reads-percent">ReadsPercent</option>
-          </select>
-          <!--toggle es un tipo de boton que al clickarlo cambia-->
-          <button id="toggleSort">ASC</button>
-        </div>
-      </div>
-      <div class="vertical-menu1">
-        <ul id="container-user">
-        </ul>
-      </div>
-
-    </article>
-  </section>
+    </div>
+  </div>
   <script src="main.js"></script>
   <script src="data.js"></script>
 </body>
