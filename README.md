@@ -63,7 +63,7 @@ Para ello hicimos huso de la herramienta **FIGMA** : Se trata de una conocida ap
 
 ## COLABORADORXS :
 
-1. Zarela Zanabria
+1. Zarela Zanabria Chuquipiondo
 2. Leyla Ticze Huaman
 
 ## Detalles de Implementación
