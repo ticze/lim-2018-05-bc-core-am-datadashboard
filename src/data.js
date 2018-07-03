@@ -1,14 +1,14 @@
 let listUsuarioComputerUser = [];
-window.computeUsersStats = (users, progress, courses) => {
 
+window.computeUsersStats = (users, progress, courses) => {
   users.map(usuario => {
     const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[usuario.id], courses);
     listUsuarioComputerUser.push(UsuarioNuevo);
   });
-  //ListarUsuarios(listUsuarioComputerUser);
   return listUsuarioComputerUser;
+}
+//console.log(listUsuarioComputerUser) 
 
-};
 const NuevoUsuarioStats = (usuario, progress, courses) => {
   let nameUser = usuario.name;
   let usersWithStats = {}
@@ -34,18 +34,18 @@ const computerExercises = (progress, courses) => {
   try {
     courses.map((curso) => {
       const valorUnits = Object.keys(progress[curso].units);
-      //console.log(valorUnits)
+
       valorUnits.map((nombreUnits) => {
-        //console.log (nombreUnits);
+
         const valorParts = Object.keys(progress[curso].units[nombreUnits].parts);
-        // console.log(valorParts)
+
         valorParts.map((nombreParts) => {
           const valorExcercises = progress[curso].units[nombreUnits].parts[nombreParts];
-          //console.log (valorExcercises)
+
           if (valorExcercises.hasOwnProperty('exercises')) {
             const nombreExercises = valorExcercises.exercises;
             cont += Object.keys(nombreExercises).length;
-            //const nombreExercises = valorExcercises.exercises
+
             const valorCompletado = Object.keys(valorExcercises.exercises);
             //console.log(valorCompletado) 
             valorCompletado.map((nombreExercises) => {
@@ -71,17 +71,23 @@ const computerExercises = (progress, courses) => {
 
     return exercises;
 
-  }
+    let exercises = {
+      total: cont,
+      completed: contComplet,
+      percent: (contComplet / cont) * 100,
+    }
+    return exercises;
 
-  let exercises = {
-    total: cont,
-    completed: contComplet,
-    percent: (contComplet / cont) * 100,
-  }
-  return exercises;
+    let exercises = {
+      total: cont,
+      completed: contComplet,
+      percent: (contComplet / cont) * 100,
+    }
+    return exercises;
 
 
-};
+  };
+}
 const computerUsersRead = (progress, courses) => {
   let cont = 0;
   let contComplet = 0;
@@ -174,220 +180,80 @@ const computerUserQuizz = (progress, courses) => {
     scoreAvg: Math.round(contscoreAvg / contComplet),
   }
   return quizzes;
-
-
 }
 
-//Funcion para Ordenar
 window.sortUsers = (users, orderBy, orderDirection) => {
-  
- //console.log(users)
-/* 
-  const sortByName = (a, b) => {
-    const obj1 = a.name.toUpperCase()
-    const obj2 = b.name.toUpperCase()
-    if (obj1 > obj2) {
-      return 1;
-    }
-    if (obj1 < obj2) {
-      return -1;
-    }
-    return 0;
+  //esta funcion ordena por orden alfabetico a las alumnas
+  if (orderBy == "Name") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        //localCompare compara 2 strings que en este caso son los nombres de las alumnas
+        return a.name.localeCompare(b.name);
+      } else {
+        //esto mostrara el ordenamiento en orden descendente
+        return a.name.localeCompare(b.name) * -1;
+      }
+    });
   }
+  if (orderBy == "Percent") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.percent - b.stats.percent;
+      } else {
+        return (a.stats.percent - b.stats.percent) * -1;
+      }
+    });
 
-  const sortByName2 = (a, b) => {
-    const obj1 = a.name.toUpperCase()
-    const obj2 = b.name.toUpperCase()
-    if (obj1 < obj2) {
-      return 1;
-    }
-    if (obj1 > obj2) {
-      return -1;
-    }
-    return 0;
   }
-
-  const sortByPercent = (a, b) => {
-    if (a.stats.percent > b.stats.percent) {
-      return 1;
-    }
-    if (a.stats.percent < b.stats.percent) {
-      return -1;
-    }
-    return 0;
+  if (orderBy == "ExcercisePercent") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.exercises.percent - b.stats.exercises.percent;
+      } else {
+        return (a.stats.exercises.percent - b.stats.exercises.percent) * -1;
+      }
+    });
+  } else if (orderBy == "QuizzesPercent") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.quizzes.percent - b.stats.quizzes.percent;
+      } else {
+        return (a.stats.quizzes.percent - b.stats.quizzes.percent) * -1;
+      }
+    });
+  } else if (orderBy == "QuizzesScoreAvg") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg;
+      } else {
+        return (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg) * -1;
+      }
+    });
+  } else if (orderBy == "ReadsPercent") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.reads.percent - b.stats.reads.percent;
+      } else {
+        return (a.stats.reads.percent - b.stats.reads.percent) * -1;
+      }
+    });
+  } else {
+    alert('Error al seleccionar el selector');
   }
-
-  const sortByPercent2 = (a, b) => {
-    if (a.stats.percent < b.stats.percent) {
-      return 1;
-    }
-    if (a.stats.percent > b.stats.percent) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByExcercisePercent = (a, b) => {
-    if (a.stats.exercises.percent > b.stats.exercises.percent) {
-      return 1;
-    }
-    if (a.stats.exercises.percent < b.stats.exercises.percent) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByExcercisePercent2 = (a, b) => {
-    if (a.stats.exercises.percent < b.stats.exercises.percent) {
-      return 1;
-    }
-    if (a.stats.exercises.percent > b.stats.exercises.percent) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByQuizzesPercent = (a, b) => {
-    if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
-      return 1;
-    }
-    if (a.stats.quizzes.percent < b.stats.quizzes.percent) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByQuizzesPercent2 = (a, b) => {
-    if (a.stats.quizzes.percent < b.stats.quizzes.percent) {
-      return 1;
-    }
-    if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByQuizzesScoreAvg = (a, b) => {
-    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
-      return 1;
-    }
-    if (a.stats.quizzes.scoreAvg < b.stats.quizzes.scoreAvg) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByQuizzesScoreAvg2 = (a, b) => {
-    if (a.stats.quizzes.scoreAvg < b.stats.quizzes.scoreAvg) {
-      return 1;
-    }
-    if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByReadsPercent = (a, b) => {
-    if (a.stats.reads.percent > b.stats.reads.percent) {
-      return 1;
-    }
-    if (a.stats.reads.percent < b.stats.reads.percent) {
-      return -1;
-    }
-    return 0;
-  }
-
-  const sortByReadsPercent2 = (a, b) => {
-    if (a.stats.reads.percent < b.stats.reads.percent) {
-      return 1;
-    }
-    if (a.stats.reads.percent > b.stats.reads.percent) {
-      return -1;
-    }
-    return 0;
-  } */
-
-  const arrName = users.map((user) => {
-    return user.name
-  })
-  //console.log(arrName)
-  debugger
-  const orderName = arrName.sort((a, b) => {
-    const obj1 = a.toUpperCase()
-    const obj2 = b.toUpperCase()
-    if (obj1 < obj2) {
-      return 1;
-    }
-    if (obj1 > obj2) {
-      return -1;
-    }
-    return 0;
-  })
-  console.log(orderName)
-
-  const reverseName = arrName.sort((a, b) => {
-    const obj1 = a.toUpperCase()
-    const obj2 = b.toUpperCase()
-    if (obj1 < obj2) {
-      return 1;
-    }
-    if (obj1 > obj2) {
-      return -1;
-    }
-    return 0;
-  })
-  
-
-  /* let sorted;
-  if (orderBy === 'name' && orderDirection === 'ASC') {
-    sorted = orderName
-  } else if (orderBy === 'name' && orderDirection === 'DESC') {
-    sorted = reverseName
-  } */ /* else if (orderBy === 'percent' && orderDirection === 'ASC') {
-    sorted = arrUser.sort(sortByPercent)
-  } else if (orderBy === 'percent' && orderDirection === 'DESC') {
-    sorted = arrUser.sort(sortByPercent2)
-  } else if (orderBy === 'excercises-percent' && orderDirection === 'ASC') {
-    sorted = arrUser.sort(sortByExcercisePercent)
-  }  else if (orderBy === 'excercises-percent' && orderDirection === 'DESC') {
-    sorted = arrUser.sort(sortByExcercisePercent2)
-  } else if (orderBy === 'quizzes-percent' && orderDirection === 'ASC') {
-    sorted = arrUser.sort(sortByQuizzesPercent)
-  }  else if (orderBy === 'quizzes-percent' && orderDirection === 'DESC') {
-    sorted = arrUser.sort(sortByQuizzesPercent2)
-  } else if (orderBy === 'quizzes-scoreAvg' && orderDirection === 'ASC') {
-    sorted = arrUser.sort(sortByQuizzesScoreAvg)
-  }  else if (orderBy === 'quizzes-scoreAvg' && orderDirection === 'DESC') {
-    sorted = arrUser.sort(sortByQuizzesScoreAvg2)
-  } else if (orderBy === 'reads-percent'&& orderDirection === 'ASC') {
-    sorted = users.sort(sortByReadsPercent)
-  } else if (orderBy === 'reads-percent'&& orderDirection === 'DESC') {
-    sorted = arrUser.sort(sortByReadsPercent2)
-  }   */
-
-  /* return sorted */
-
 };
-
 window.filterUsers = (users, search) => {
-  //console.log('hola soy el array' + users);
-  //console.log('hola soy el texto del user' + search);
-
-  let buscarUser = users.filter(listaUser => listaUser.name.includes(search))
-  //console.log (buscarUser);
-  return buscarUser;
-
-  /* const userFilter = users.filter(user => {
-      console.log (user);
-      return user.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
-  });
-  //console.log(userFilter);
-  return userFilter; */
-
-};
+  if (search) {
+    if (users) {
+      search = search.toLowerCase();
+      return users.filter(user => user &&
+        user.name && user.name.toLowerCase().indexOf(search) >= 0);
+    }
+  }
+  return users;
+}
 
 window.processCohortData = (options) => {
-};
 
+}
 
 
