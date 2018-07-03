@@ -71,23 +71,17 @@ const computerExercises = (progress, courses) => {
 
     return exercises;
 
-    let exercises = {
-      total: cont,
-      completed: contComplet,
-      percent: (contComplet / cont) * 100,
-    }
-    return exercises;
+  }
 
-    let exercises = {
-      total: cont,
-      completed: contComplet,
-      percent: (contComplet / cont) * 100,
-    }
-    return exercises;
+  let exercises = {
+    total: cont,
+    completed: contComplet,
+    percent: (contComplet / cont) * 100,
+  }
+  return exercises;
 
 
-  };
-}
+};
 const computerUsersRead = (progress, courses) => {
   let cont = 0;
   let contComplet = 0;
@@ -253,7 +247,15 @@ window.filterUsers = (users, search) => {
 }
 
 window.processCohortData = (options) => {
-
+  const courses = 'intro' ;
+  let listNewArrays = computeUsersStats(options.cohortData.users,options.cohortData.progress,courses);
+  //console.log(listNewArrays)
+    listNewArrays = sortUsers(listNewArrays,options.orderBy,options.orderDirection);
+        if(options.search != ''){
+            listNewArrays = filterUsers(listNewArrays,options.search);
+            }else{
+                listNewArrays = sortUsers(listNewArrays,options.orderBy,options.orderDirection);
+            }  
+    
+    return listNewArrays;  
 }
-
-
