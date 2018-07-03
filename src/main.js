@@ -32,24 +32,28 @@ let options = {
 
 const addUserProgress = () => {
   const courses = ["intro"]
-  const users = JSON.parse(event.target.responseText);
+  const datausers = JSON.parse(event.target.responseText);
+  options.cohortData.users = datausers;
   const addCohorts = (event) => {
     const cohorts = JSON.parse(event.target.responseText);
+    //options.cohort = cohorts;
+    
     cohorts.map((dataCohorts) => {
       const listCor = document.createElement('option');
       listCor.value = dataCohorts.id;
       listCor.innerHTML = dataCohorts.id;      
       selectbtn.appendChild(listCor);
       options.cohort = dataCohorts.id;
+      console.log(options)
     });
   }
   getJSON(urlCohorts, addCohorts);
   const progress = () => {
-    const progress = JSON.parse(event.target.responseText);
-    let usersStats = computeUsersStats (users, progress, courses);
+    const dataprogress = JSON.parse(event.target.responseText);
+    options.cohortData.progress = dataprogress ;
+    let usersStats = computeUsersStats(datausers, dataprogress, courses);
   }
-  options.cohortData.users = addUserProgress;
-  options.cohortData.progress = progress;
+ 
   processCohortData(options)
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
