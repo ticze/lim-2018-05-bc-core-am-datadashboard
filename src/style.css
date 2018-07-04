@@ -59,3 +59,38 @@ width: 100%;
       height: 100%;
   }
 }
+
+
+#contenedor {
+  display: inline-block;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 100%;
+  margin: 0%;
+  text-align: left;
+}
+
+#sedes{
+  padding: 0%;
+  margin: 0%;
+}
+#select-cohorts{
+width: 100%;
+}
+
+
+/* Clear floats after the columns */
+#contenedor:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  #contenedor {
+      width: 100%;
+      height: 100%;
+  }
+}
