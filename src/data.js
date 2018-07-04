@@ -1,18 +1,16 @@
-//let listUsuarioComputerUser = [];
-
 window.computeUsersStats = (users, progress, courses) => {
 
-  let usersWithStats = users.map(usuario => {
-    return NuevoUsuarioStats(usuario, progress[usuario.id], courses);
-    //listUsuarioComputerUser.push(UsuarioNuevo);
+  let usersWithStats = users.map(usuario1 => {
+    return NuevoUsuarioStats(usuario1, progress[usuario1.id], courses);
+    
   });
-  // console.log(usersWithStats);
+  
   return usersWithStats;
 }
-//console.log(listUsuarioComputerUser) 
 
-const NuevoUsuarioStats = (usuario, progress, courses) => {
-  let nameUser = usuario.name;
+
+const NuevoUsuarioStats = (usuarioS, progress, courses) => {
+  let nameUser = usuarioS.name;
   let usersWithStats = {}
   usersWithStats.stats = {
     percent: computerUserPercent(progress, courses),
@@ -244,8 +242,8 @@ window.filterUsers = (users, search) => {
       return users.filter(user => user &&
         user.name && user.name.toLowerCase().indexOf(search) >= 0);
     }
+    return users;
   }
-  return users;
 }
 
 window.processCohortData = (options) => {
