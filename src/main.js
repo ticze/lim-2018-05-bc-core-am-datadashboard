@@ -47,9 +47,9 @@ const addCohort = (campus, dataCohorts) => {
   listUsers.innerHTML = '';
   for (const cohortForSedes of sedes) {
     let listUser = document.createElement('li');
-    let newAtri = document.createAttribute('id');
-    newAtri.value = cohortForSedes.id;
-    listUser.setAttributeNode(newAtri)
+    let newAtrib = document.createAttribute('id');
+    newAtrib.value = cohortForSedes.id;
+    listUser.setAttributeNode(newAtrib)
     listUser.innerHTML += cohortForSedes.id;
     listUsers.appendChild(listUser);
   }
@@ -64,7 +64,7 @@ selectbtn.addEventListener('change', (event) => {
 const addProgress = (cohortGeneracion , dataProgress) =>{
   //console.log(cohortGeneracion , dataProgress)
   options.cohortData.progress = dataProgress;
-  console.log(options)
+  //console.log(options)
   progressCohortData(options)
 }
 
@@ -76,12 +76,11 @@ const addUser = (cohortGeneracion , dataUsers) => {
 
 listUsers.addEventListener('click' , (event) => {
  //console.log(event.target.id)
- options.cohort.forEach(element => {
+  options.cohort.forEach(element => {
    if(element.id === event.target.id){
      options.cohort = element;
    }
  });
-
  getJSON(event.target.id , `../../data/cohorts/${event.target.id}/users.json`, addUser)
 })
 
