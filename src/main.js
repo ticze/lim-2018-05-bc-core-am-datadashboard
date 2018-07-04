@@ -44,7 +44,7 @@ const addUserProgress = () => {
       listCor.innerHTML = dataCohorts.id;      
       selectbtn.appendChild(listCor);
       options.cohort = dataCohorts.id;
-      console.log(options)
+      //console.log(options)
     });
   }
   getJSON(urlCohorts, addCohorts);

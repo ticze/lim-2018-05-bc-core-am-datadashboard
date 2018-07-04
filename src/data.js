@@ -1,8 +1,11 @@
 let listUsuarioComputerUser = [];
 
 window.computeUsersStats = (users, progress, courses) => {
-  users.map(usuario => {
-    const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[usuario.id], courses);
+  // debugger
+  let roleStudent = users.filter(students => students.role === 'student');
+  console.log(roleStudent)
+  const almun = roleStudent.map(usuario => {
+    const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[roleStudent.id], courses);
     listUsuarioComputerUser.push(UsuarioNuevo);
   });
   return listUsuarioComputerUser;
