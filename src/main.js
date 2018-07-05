@@ -18,18 +18,19 @@ const getJSON = (url, callback) => {
   request.send();
 }
 const handleError = () => {
-   console.log('Se ha presentado un error');
+  console.log('Se ha presentado un error');
 }
 
 let options = {
-  cohort: '',
+  cohort: null,
   cohortData: {
-    users: [],
-    progress: {}
+    users: null,
+    progress: null,
+
   },
-  orderBy: '',
-  orderDirection: '',
-  search: '',
+  orderBy: 'Name',
+  orderDirection: 'ASC',
+  search: ''
 }
 
 const addUserProgress = () => {
@@ -38,7 +39,7 @@ const addUserProgress = () => {
   const addCohorts = (event) => {
     const cohorts = JSON.parse(event.target.responseText);
     options.cohorts = cohorts;
-    listaS.addEventListener('click', e =>{
+    listaS.addEventListener('click', e => {
       console.log(e.target.id);
       const nuevoArray = cohorts.filter(cohort => cohort.id.indexOf(e.target.id) > -1);
       selectbtn.innerHTML = '';
@@ -48,10 +49,10 @@ const addUserProgress = () => {
         listCohort.innerHTML = dataCohorts.id;
         selectbtn.appendChild(listCohort);
       });
-      
-      })
+
+    })
     //MUESTRA TODOS LOS COHORST               
-    
+
   }
   getJSON(urlCohorts, addCohorts);
 
@@ -88,15 +89,15 @@ const ListarUsuarios = (userArr) => {
 //Evento para listar Usuarios cuando selecionamos el cohorts
 selectbtn.addEventListener('change', e => {
   e.preventDefault();
-  if(selectbtn.value === 'lim-2018-03-pre-core-pw'){
+  if (selectbtn.value === 'lim-2018-03-pre-core-pw') {
     const cohort = options.cohorts.find(c => c.id === e.target.value);
-  options.cohort = cohort;
-  const data = processCohortData(options);
-  ListarUsuarios(data);
-  }else{
+    options.cohort = cohort;
+    const data = processCohortData(options);
+    ListarUsuarios(data);
+  } else {
     contUsers.innerHTML = '';
   }
-  
+
 });
 
 //Evento para buscar Estudiante
