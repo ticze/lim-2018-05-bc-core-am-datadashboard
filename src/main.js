@@ -9,17 +9,6 @@ const orderBybtn = document.getElementById('toggleSort'); //ASC O DESC
 const selectOrderBy = document.getElementById('orderBy');//SELECTOR 
 const listaS = document.getElementById('listasedes');
 
-let options = {
-  cohort: null,
-  cohortData: {
-    users: null,
-    progress: null,
-
-  },
-  orderBy: 'Name',
-  orderDirection: 'ASC',
-  search: ''
-}
 
 const getJSON = (url, callback) => {
   const request = new XMLHttpRequest();
