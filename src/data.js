@@ -1,19 +1,15 @@
-let listUsuarioComputerUser = [];
-
 window.computeUsersStats = (users, progress, courses) => {
-  // debugger
-  let roleStudent = users.filter(students => students.role === 'student');
-  console.log(roleStudent)
-  const almun = roleStudent.map(usuario => {
-    const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[roleStudent.id], courses);
-    listUsuarioComputerUser.push(UsuarioNuevo);
-  });
-  return listUsuarioComputerUser;
-}
-//console.log(listUsuarioComputerUser) 
 
-const NuevoUsuarioStats = (usuario, progress, courses) => {
-  let nameUser = usuario.name;
+  let usersWithStats = users.map(usuario1 => {
+    return NuevoUsuarioStats(usuario1, progress[usuario1.id], courses);
+    
+  });
+    return usersWithStats;
+}
+
+
+const NuevoUsuarioStats = (usuarioS, progress, courses) => {
+  let nameUser = usuarioS.name;
   let usersWithStats = {}
   usersWithStats.stats = {
     percent: computerUserPercent(progress, courses),
@@ -235,7 +231,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       }
     });
   } else {
-    alert('Error al seleccionar el selector');
+    // alert('Error al seleccionar el selector');
   }
 };
 window.filterUsers = (users, search) => {
@@ -245,20 +241,19 @@ window.filterUsers = (users, search) => {
       return users.filter(user => user &&
         user.name && user.name.toLowerCase().indexOf(search) >= 0);
     }
+    return users;
   }
-  return users;
 }
 
 window.processCohortData = (options) => {
-  const courses = 'intro' ;
-  let listNewArrays = computeUsersStats(options.cohortData.users,options.cohortData.progress,courses);
-  //console.log(listNewArrays)
-    listNewArrays = sortUsers(listNewArrays,options.orderBy,options.orderDirection);
-        if(options.search != ''){
-            listNewArrays = filterUsers(listNewArrays,options.search);
-            }else{
-                listNewArrays = sortUsers(listNewArrays,options.orderBy,options.orderDirection);
-            }  
-    
-    return listNewArrays;  
+  let courses = Object.keys(options.cohort.coursesIndex);
+  let students = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  students = sortUsers(students, options.orderBy, options.orderDirection);
+
+  if (options.search !== '') {
+    students = filterUsers(students, options.search);
+  }
+
+  return students;
+
 }
