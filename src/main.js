@@ -81,7 +81,9 @@ selectbtn.addEventListener('change', e => {
 
   for (const cohort of options.cohort) {
     if (selectbtn.value === cohort.id) {
+      console.log (selectbtn.value === cohort.id)
       options.cohort = cohort;
+      debugger
       const data = processCohortData(options);
       ListarUsuarios(data);
     }
