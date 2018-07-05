@@ -25,7 +25,7 @@ describe('data', () => {
     it('debería retornar arreglo de usuarios con propiedad stats', () => {
       const processed = computeUsersStats(users, progress, courses);
 
-      assert.equal(users.length, processed.length);
+      assert.equal(users.filter(u => u.role === 'student').length, processed.length);
 
       processed.forEach(user => {
         assert.ok(user.hasOwnProperty('stats'));
@@ -186,7 +186,9 @@ describe('data', () => {
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC', () => {
       assert.deepEqual(window.sortUsers(students, "ReadsPercent", "DES"), [studentB, studentA, studentC])
     });
-
+    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC', () => {
+      assert.deepEqual(window.sortUsers(students, "aaaaaaa", "DES"), students)
+    });
   });
 
   describe('filterUsers(users, filterBy)', () => {
@@ -231,6 +233,8 @@ describe('data', () => {
       ]
       assert.deepEqual(window.filterUsers(array, "Dorelly"), dorelly);
       assert.deepEqual(window.filterUsers(array, "Dalia"), dalia);
+      assert.deepEqual(window.filterUsers(null, "Dalia"), []);
+      assert.deepEqual(window.filterUsers(null, ""), []);
     });
 
   });

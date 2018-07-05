@@ -13,31 +13,52 @@
 <body>
   <header>
     <figure>
-      <img src="../img/Laboratoria_CMYK_logo-03.png">
+      <img src="../img/Laboratoria_CMYK_logo-01.png">
     </figure>
   </header>
-  <div id="contenedor">
-    <div id="sedes">
-      <select id="select-cohorts"></select>
-      <input id="searchBox" type="text" placeholder="Buscar">
-      <div>
-        <select name="" id="orderBy">
-          <option value="name">Name</option>
-          <option value="percent">Percent</option>
-          <option value="excercises-percent">ExcercisePercent</option>
-          <option value="quizzes-percent">QuizzesPercent</option>
-          <option value="quizzes-scoreAvg">QuizzesScoreAvg</option>
-          <option value="reads-percent">ReadsPercent</option>
-        </select>
-        <!--toggle es un tipo de boton que al clickarlo cambia-->
-        <button id="toggleSort">ASC</button>
-      </div>
-    </div>
-    <div class="vertical-menu1">
-      <ul id="container-user">
+  <section>
+    <nav class="vertical-menu">
+      <ul class="">
+        <li>
+          <a href="#">MEXICO</a>
+        </li>
+        <li>
+          <a href="#"> LIMA</a>
+        </li>
+        <li>
+          <a href="#"> CHILE</a>
+        </li>
+        <li>
+          <a href="#"> GUADALAJARA</a>
+        </li>
+        <li>
+          <a href="#">SAO PABLO</a>
+        </li>
       </ul>
-    </div>
-  </div>
+    </nav>
+    <article>
+      <div id="sedes">
+        <select id="select-cohorts"></select>
+        <input id="searchBox" type="text" placeholder="Buscar">
+        <div>
+          <select name="" id="orderBy">
+            <option value="name">Name</option>
+            <option value="percent">Percent</option>
+            <option value="excercises-percent">ExcercisePercent</option>
+            <option value="quizzes-percent">QuizzesPercent</option>
+            <option value="quizzes-scoreAvg">QuizzesScoreAvg</option>
+            <option value="reads-percent">ReadsPercent</option>
+          </select>
+          <!--toggle es un tipo de boton que al clickarlo cambia-->
+          <button id="toggleSort">ASC</button>
+        </div>
+      </div>
+      <div class="vertical-menu1">
+        <ul id="container-user">
+        </ul>
+      </div>
+    </article>
+  </section>
   <script src="main.js"></script>
   <script src="data.js"></script>
 </body>

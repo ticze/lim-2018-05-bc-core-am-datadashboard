@@ -4,49 +4,82 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
+  background-color:  rgb(255, 245, 33); 
 }
 
 /* Style the header */
 header {
-  background-color: #ffffff;
+  
   display: inline-block;
   height: 100px;
   width: 100%;
   margin: 0%;
 }
 figure{
-margin: 0;
-height: 100px;  
-text-align: center;
+  
+  margin: 0;
+  height: 100px;  
+  text-align: center;
 }
 img{
-margin: 0;
-height: 100px;
+  margin: 0;
+  height: 100px;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  height: 75%; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 10px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.vertical-menu a {
+  background-color: #000000;
+  color: white;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
 }
 
 
-#contenedor {
-  display: inline-block;
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #ccc;
+  color: white;
+}
+
+article {
+  float: right;
   padding: 20px;
   width: 70%;
   background-color: #f1f1f1;
-  height: 100%;
-  margin: 0%;
-  text-align: left;
+  height: 75%; 
+}
+section{
+  background-color: #ccc;
 }
 
 #sedes{
-  padding: 0%;
-  margin: 0%;
+  padding: 9px;
 }
 #select-cohorts{
-width: 100%;
+  width: 100%;
 }
 
 
 /* Clear floats after the columns */
-#contenedor:after {
+section:after {
   content: "";
   display: table;
   clear: both;
@@ -54,8 +87,8 @@ width: 100%;
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
-  #contenedor {
-      width: 100%;
-      height: 100%;
+  nav, article {
+    width: 100%;
+    height: fit-content;
   }
-}
+}  

@@ -1,10 +1,9 @@
 window.computeUsersStats = (users, progress, courses) => {
-
-  let usersWithStats = users.map(usuario1 => {
+  let roleStudent = users.filter(students => students.role === 'student');
+  let usersWithStats = roleStudent.map(usuario1 => {
     return NuevoUsuarioStats(usuario1, progress[usuario1.id], courses);
-    
   });
-    return usersWithStats;
+  return usersWithStats;
 }
 
 
@@ -222,7 +221,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
         return (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg) * -1;
       }
     });
-  } else if (orderBy == "ReadsPercent") {
+  } else if (orderBy === "ReadsPercent") {
     return users.sort((a, b) => {
       if (orderDirection == "ASC") {
         return a.stats.reads.percent - b.stats.reads.percent;
@@ -231,7 +230,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       }
     });
   } else {
-    // alert('Error al seleccionar el selector');
+    return users;
   }
 };
 window.filterUsers = (users, search) => {
@@ -241,8 +240,9 @@ window.filterUsers = (users, search) => {
       return users.filter(user => user &&
         user.name && user.name.toLowerCase().indexOf(search) >= 0);
     }
-    return users;
+    return [];
   }
+  return users || [];
 }
 
 window.processCohortData = (options) => {
