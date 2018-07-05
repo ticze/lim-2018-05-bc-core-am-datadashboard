@@ -31,6 +31,18 @@ const getJSON = (url, callback) => {
 const handleError = () => {
    console.log('Se ha presentado un error');
 }
+
+let options = {
+  cohort: '',
+  cohortData: {
+    users: [],
+    progress: {}
+  },
+  orderBy: '',
+  orderDirection: '',
+  search: '',
+}
+
 const addUserProgress = () => {
   const users = JSON.parse(event.target.responseText);
 
@@ -63,6 +75,7 @@ const addUserProgress = () => {
 
 }
 getJSON(urlUser, addUserProgress);
+
 
 //Funcion para Listar Estudiantes en una lista
 const ListarUsuarios = (userArr) => {
