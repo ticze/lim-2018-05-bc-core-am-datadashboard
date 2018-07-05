@@ -7,6 +7,7 @@ const contUsers = document.getElementById('container-user');
 const inputFilterUser = document.getElementById('searchBox');//buscar imput
 const orderBybtn = document.getElementById('toggleSort'); //ASC O DESC
 const selectOrderBy = document.getElementById('orderBy');//SELECTOR 
+const listaS = document.getElementById('listasedes');
 
 let options = {
   cohort: null,
@@ -35,15 +36,21 @@ const addUserProgress = () => {
 
   const addCohorts = (event) => {
     const cohorts = JSON.parse(event.target.responseText);
-    options.cohort = cohorts;
-
+    options.cohorts = cohorts;
+    listaS.addEventListener('click', e =>{
+      console.log(e.target.id);
+      const nuevoArray = cohorts.filter(cohort => cohort.id.indexOf(e.target.id) > -1);
+      selectbtn.innerHTML = '';
+      nuevoArray.map((dataCohorts) => {
+        const listCohort = document.createElement('option');
+        listCohort.value = dataCohorts.id;
+        listCohort.innerHTML = dataCohorts.id;
+        selectbtn.appendChild(listCohort);
+      });
+      
+      })
     //MUESTRA TODOS LOS COHORST               
-    cohorts.map((dataCohorts) => {
-      const listCohort = document.createElement('option');
-      listCohort.value = dataCohorts.id;
-      listCohort.innerHTML = dataCohorts.id;
-      selectbtn.appendChild(listCohort);
-    });
+    
   }
   getJSON(urlCohorts, addCohorts);
 
@@ -75,20 +82,19 @@ const ListarUsuarios = (userArr) => {
     contUsers.appendChild(listUser);
   });
 }
+
 //Evento para listar Usuarios cuando selecionamos el cohorts
 selectbtn.addEventListener('change', e => {
   e.preventDefault();
-
-  for (const cohort of options.cohort) {
-    if (selectbtn.value === cohort.id) {
-      //console.log (selectbtn.value === cohort.id)
-      options.cohort = cohort;
-
-      const data = processCohortData(options);
-      ListarUsuarios(data);
-    }
+  if(selectbtn.value === 'lim-2018-03-pre-core-pw'){
+    const cohort = options.cohorts.find(c => c.id === e.target.value);
+  options.cohort = cohort;
+  const data = processCohortData(options);
+  ListarUsuarios(data);
+  }else{
+    contUsers.innerHTML = '';
   }
-
+  
 });
 
 //Evento para buscar Estudiante

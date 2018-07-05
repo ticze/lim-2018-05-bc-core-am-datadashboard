@@ -247,13 +247,12 @@ window.filterUsers = (users, search) => {
 
 window.processCohortData = (options) => {
   let courses = Object.keys(options.cohort.coursesIndex);
-  let students = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  const users = options.cohortData.users.filter(u => u.signupCohort === options.cohort.id);
+  let students = computeUsersStats(users, options.cohortData.progress, courses);
   students = sortUsers(students, options.orderBy, options.orderDirection);
 
   if (options.search !== '') {
     students = filterUsers(students, options.search);
   }
-
   return students;
-
 }
